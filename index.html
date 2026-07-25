@@ -897,6 +897,7 @@
                 <button class="w-full bg-primary-container text-white py-4 rounded-lg font-bold uppercase hover:bg-primary transition-all shadow-md" type="submit">
                   Enviar Mensagem
                 </button>
+                <div id="contact-form-message" style="display: none; margin-top: 15px; text-align: center; font-weight: bold; font-size: 0.9rem;"></div>
               </form>
             </div>
           </div>
@@ -1495,15 +1496,25 @@
           closeModal();
       });
       // --- INÍCIO DO NOVO CÓDIGO DO FORMULÁRIO ---
+      // --- INÍCIO DO NOVO CÓDIGO DO FORMULÁRIO ---
       const submitBtn = contactForm.querySelector("button[type='submit']");
 
       if (contactForm) {
         contactForm.addEventListener("submit", (event) => {
           event.preventDefault(); // Impede de abrir a página branca do FormSubmit
 
+          // Verifica se a div da mensagem existe, se não, cria uma na hora
+          let msgBox = document.querySelector("#contact-form-message");
+          if (!msgBox) {
+            msgBox = document.createElement("div");
+            msgBox.id = "contact-form-message";
+            msgBox.style.cssText = "margin-top: 15px; text-align: center; font-weight: bold; font-size: 0.9rem;";
+            contactForm.appendChild(msgBox);
+          }
+
           // Muda o texto do botão enquanto está enviando
           const originalBtnText = submitBtn.innerText;
-          submitBtn.innerText = "Enviando...";
+          submitBtn.innerText = "ENVIANDO...";
           submitBtn.disabled = true; // Evita cliques duplos
 
           const formData = new FormData(contactForm);
@@ -1512,14 +1523,19 @@
           fetch(contactForm.action, {
             method: "POST",
             body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
           })
-          .then(response => response.json())
+          .then(response => {
+            if (!response.ok) throw new Error("Erro na rede");
+            return response.json();
+          })
           .then(data => {
             // Mostra a mensagem de sucesso
-            contactFormMessage.innerText = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
-            contactFormMessage.style.color = "#10b981"; // Cor verde
-            contactFormMessage.style.display = "block"; 
-            contactFormMessage.classList.add("is-visible"); 
+            msgBox.innerText = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
+            msgBox.style.color = "#10b981"; // Cor verde
+            msgBox.style.display = "block"; 
             
             contactForm.reset(); // Limpa os campos preenchidos
             submitBtn.innerText = originalBtnText; // Volta o texto do botão
@@ -1527,21 +1543,20 @@
             
             // Esconde a mensagem de sucesso depois de 5 segundos
             setTimeout(() => {
-              contactFormMessage.style.display = "none";
-              contactFormMessage.classList.remove("is-visible");
+              msgBox.style.display = "none";
             }, 5000);
           })
           .catch(error => {
-            // Se der erro na internet
-            contactFormMessage.innerText = "Erro ao enviar. Verifique sua conexão e tente novamente.";
-            contactFormMessage.style.color = "#ef4444"; // Cor vermelha
-            contactFormMessage.style.display = "block";
-            contactFormMessage.classList.add("is-visible");
+            // Se der erro
+            msgBox.innerText = "Erro ao enviar. Verifique sua conexão e tente novamente.";
+            msgBox.style.color = "#ef4444"; // Cor vermelha
+            msgBox.style.display = "block";
             submitBtn.innerText = originalBtnText;
             submitBtn.disabled = false;
           });
         });
       }
+      // --- FIM DO NOVO CÓDIGO DO FORMULÁRIO ---
       // --- FIM DO NOVO CÓDIGO DO FORMULÁRIO ---
     </script>
     <div vw class="enabled">
