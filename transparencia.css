@@ -1,0 +1,256 @@
+/* ══════════════════════════════════════════════════
+   transparencia.css
+   Estilos exclusivos da página de Transparência
+   Não afeta index.html nem styles.css
+   ══════════════════════════════════════════════════ */
+
+/* Reset de regras do styles.css que conflitam nesta página */
+body {
+  background: #f4f6fa;
+}
+
+/* Impede que .screen-section force height: 100vh nesta página */
+.transp-hero {
+  height: auto !important;
+  min-height: auto !important;
+}
+
+/* ── Página wrapper ── */
+.transp-page {
+  min-height: 60vh;
+  background: #f4f6fa;
+  padding-bottom: 5rem;
+}
+
+/* ── Hero ── */
+.transp-hero {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(252, 204, 0, 0.1), transparent 22rem),
+    linear-gradient(135deg, #082567 0%, #001241 100%);
+  padding: 5rem 1.25rem 5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.transp-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fccc00;
+  font-family: "Barlow Condensed", Inter, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.transp-hero-kicker::before,
+.transp-hero-kicker::after {
+  content: "";
+  width: 2rem;
+  height: 2px;
+  background: #fccc00;
+  display: block;
+}
+
+.transp-hero h1 {
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.transp-hero p {
+  max-width: 42rem;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ── Container ── */
+.transp-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ── Bloco de ano ── */
+.transp-year-block {
+  margin-top: 3.5rem;
+}
+
+.transp-year-title {
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  color: #082567;
+  letter-spacing: 0.04em;
+  border-bottom: 3px solid #fccc00;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.transp-year-desc {
+  color: #444;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 48rem;
+}
+
+.transp-year-desc strong {
+  color: #082567;
+}
+
+/* ── Grid de documentos ── */
+.transp-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Card de documento ── */
+.transp-doc-card {
+  background: #fff;
+  border: 1px solid #e2e6f0;
+  border-radius: 0.75rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  box-shadow: 0 2px 12px rgba(8, 37, 103, 0.07);
+  transition:
+    box-shadow 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease;
+}
+
+.transp-doc-card:hover {
+  border-color: rgba(8, 37, 103, 0.25);
+  box-shadow: 0 6px 24px rgba(8, 37, 103, 0.13);
+  transform: translateY(-2px);
+}
+
+.transp-doc-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  background: rgba(8, 37, 103, 0.07);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #082567;
+  flex-shrink: 0;
+}
+
+.transp-doc-icon .material-symbols-outlined {
+  font-size: 1.4rem;
+}
+
+.transp-doc-name {
+  font-family: "Barlow Condensed", Inter, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #082567;
+  line-height: 1.25;
+}
+
+.transp-doc-meta {
+  font-size: 0.82rem;
+  color: #7a84a0;
+  margin-top: 0.15rem;
+}
+
+.transp-doc-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.6rem 1.1rem;
+  background: #082567;
+  color: #fff;
+  font-family: "Barlow Condensed", Inter, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  transition:
+    background 220ms ease,
+    box-shadow 220ms ease;
+  align-self: flex-start;
+}
+
+.transp-doc-download:hover {
+  background: #0a2b70;
+  box-shadow: 0 4px 14px rgba(8, 37, 103, 0.28);
+}
+
+.transp-doc-download .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.transp-doc-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding: 0.55rem 1rem;
+  background: #f0f3fa;
+  color: #7a84a0;
+  font-family: "Barlow Condensed", Inter, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  border-radius: 0.4rem;
+  align-self: flex-start;
+}
+
+/* ── Nota legal ── */
+.transp-note {
+  margin-top: 3.5rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(8, 37, 103, 0.04);
+  border-left: 3px solid #fccc00;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.65;
+}
+
+/* ── Link voltar ── */
+.transp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 2.5rem 0 0;
+  color: #082567;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: gap 200ms ease;
+}
+
+.transp-back:hover {
+  gap: 0.7rem;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .transp-hero {
+    padding: 5rem 1rem 4rem;
+  }
+  .transp-docs-grid {
+    grid-template-columns: 1fr;
+  }
+}
