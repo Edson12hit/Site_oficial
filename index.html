@@ -3,31 +3,123 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="Site oficial do Esporte Clube Itapetininga. Conheça nossa história, categorias de base, diretoria, transparência e projetos sociais desde 1950." />
+    <title>Esporte Clube Itapetininga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Estilos forçados para o Menu Cascata */
+      .menu-cascata {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 15px;
+        width: 250px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        overflow: hidden;
+      }
+      .menu-cascata.ativo {
+        display: block;
+      }
+      .menu-cascata a {
+        display: block;
+        padding: 12px 20px;
+        font-size: 14px;
+        color: #1f2937;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 1px solid #f3f4f6;
+        transition: background-color 0.2s;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+      .menu-cascata a:last-child {
+        border-bottom: none;
+      }
+      .menu-cascata a:hover {
+        background-color: #f3f4f6;
+        color: #1e3a8a;
+      }
+
+      /* WIDGET DE ACESSIBILIDADE FLUTUANTE NA DIREITA */
+      .accessibility-panel {
+        position: fixed;
+        right: 10px;
+        top: 45%;
+        transform: translateY(-50%);
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .accessibility-trigger {
+        background-color: #0b1c3f;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+      }
+      .accessibility-trigger:hover {
+        background-color: #ffcc00;
+        color: #0b1c3f;
+      }
+      .accessibility-content {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border: 1px solid #e5e7eb;
+      }
+      .accessibility-content.active {
+        display: flex;
+      }
+      .accessibility-content button {
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1f2937;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .accessibility-content button:hover {
+        background: #e5e7eb;
+      }
+
+      /* Estilo de Alto Contraste */
+      body.ativo,
+      body.alto-contraste {
+        background-color: #000 !important;
+        color: #fff !important;
+      }
+    </style>
   </head>
-  <body
-    class="bg-background text-on-surface font-body-lg selection:bg-secondary-container selection:text-on-secondary-container"
-  >
+  <body class="bg-background text-on-surface font-body-lg selection:bg-secondary-container selection:text-on-secondary-container">
     <header class="site-header">
       <div class="site-header-main">
         <a class="site-brand" href="#" aria-label="Esporte Clube Itapetininga">
-          <img
-            alt="EC Itapetininga Logo"
-            class="site-brand-logo"
-            src="img/eci.png"
-          />
+          <img alt="EC Itapetininga Logo" class="site-brand-logo" src="img/eci.png" />
           <span class="site-brand-text">
             <strong>EC Itapetininga</strong>
             <small>Desde 1950</small>
@@ -35,103 +127,96 @@
         </a>
         <nav class="site-nav" aria-label="Navegação principal">
           <a class="top-nav-link" data-nav-link href="#hero">Início</a>
-          <a class="top-nav-link is-active" data-nav-link href="#history">História</a>
-          <a class="top-nav-link" data-nav-link href="#categories">Base</a>
+          
+          <!-- MENU: O CLUBE -->
+          <div class="group" style="position: relative; display: flex; height: 100%;">
+            <a class="top-nav-link" onclick="toggleDropdown('dropdown-clube')" style="cursor: pointer; display: inline-flex; align-items: center;">
+              O Clube
+              <span class="material-symbols-outlined" style="font-size: 16px; margin-left: 2px;">expand_more</span>
+            </a>
+            <div id="dropdown-clube" class="menu-cascata" style="top: 100%; left: 0;">
+              <a href="#history" data-nav-link onclick="toggleDropdown('dropdown-clube')">Nossa História</a>
+              <a href="diretoria.html">Diretoria</a>
+              <a href="governanca.html">Garantias e Governança</a>
+              <a href="infraestrutura.html">Infraestrutura</a>
+              <a href="etica.html">Código de Ética</a>
+              <a href="#contact" data-nav-link onclick="toggleDropdown('dropdown-clube')">Solicitar Estatuto</a>
+              <a href="transparencia.html">Portal da Transparência</a>
+            </div>
+          </div>
+
+          <!-- MENU: BASE -->
+          <div class="group" style="position: relative; display: flex; height: 100%;">
+            <a class="top-nav-link" onclick="toggleDropdown('dropdown-base')" style="cursor: pointer; display: inline-flex; align-items: center;">
+              Base
+              <span class="material-symbols-outlined" style="font-size: 16px; margin-left: 2px;">expand_more</span>
+            </a>
+            <div id="dropdown-base" class="menu-cascata" style="top: 100%; left: 0;">
+              <a href="#categories" data-nav-link onclick="toggleDropdown('dropdown-base')">Nossas Categorias</a>
+              <a href="comissao.html">Comissão Técnica</a>
+              <a href="metodologia.html">Metodologia de Formação</a>
+              <a href="peneiras.html">Peneiras e Avaliações</a>
+            </div>
+          </div>
+
           <a class="top-nav-link" data-nav-link href="#pilar-iniciacao">Projeto Social</a>
           <a class="top-nav-link" data-nav-link href="#contact">Contato</a>
-          <a class="top-nav-link" href="transparencia.html">Transparência</a>
         </nav>
-        <a
-          href="#apoie-modal"
-          class="desktop-support-link site-cta"
-          aria-label="Apoie o Clube"
-          data-modal-open
-        >
+        <a href="#apoie-modal" class="desktop-support-link site-cta" aria-label="Apoie o Clube" data-modal-open>
           Apoie o Clube
-          <span class="material-symbols-outlined" aria-hidden="true"
-            >arrow_forward</span
-          >
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
         </a>
-        <button
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-          aria-label="Abrir menu"
-          class="mobile-menu-button site-menu-button"
-          data-mobile-menu-button
-          type="button"
-        >
-          <span class="material-symbols-outlined" data-mobile-menu-icon>
-            menu
-          </span>
+        <button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu" class="mobile-menu-button site-menu-button" data-mobile-menu-button type="button">
+          <span class="material-symbols-outlined" data-mobile-menu-icon>menu</span>
         </button>
       </div>
-      <nav
-        aria-label="Menu mobile"
-        class="mobile-menu"
-        data-mobile-menu
-        id="mobile-menu"
-      >
+      
+      <!-- MENU MOBILE -->
+      <nav aria-label="Menu mobile" class="mobile-menu" data-mobile-menu id="mobile-menu">
         <div class="mobile-menu-inner">
           <div class="mobile-menu-brand" aria-hidden="true">
             <span>ECI</span>
             <small>Portal Oficial</small>
           </div>
-          <a class="mobile-menu-link" data-mobile-menu-link href="#hero"
-            >Início</a
-          >
-          <a class="mobile-menu-link" data-mobile-menu-link href="#history"
-            >História</a
-          >
-          <a class="mobile-menu-link" data-mobile-menu-link href="#categories"
-            >Base</a
-          >
-          <a class="mobile-menu-link" data-mobile-menu-link href="#pilar-iniciacao"
-            >Projeto Social</a
-          >
-          <a class="mobile-menu-link" href="transparencia.html"
-            >Transparência</a
-          >
-          <a class="mobile-menu-link" data-mobile-menu-link href="#contact"
-            >Contato</a
-          >
+          
+          <a class="mobile-menu-link" data-mobile-menu-link href="#hero">Início</a>
+          
+          <div style="padding: 10px 20px; margin-top: 10px; font-weight: bold; color: #ffcc00; text-transform: uppercase; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.1);">O Clube</div>
+          <a class="mobile-menu-link" data-mobile-menu-link href="#history" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Nossa História</a>
+          <a class="mobile-menu-link" href="diretoria.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Diretoria</a>
+          <a class="mobile-menu-link" href="governanca.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Garantias e Governança</a>
+          <a class="mobile-menu-link" href="infraestrutura.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Infraestrutura</a>
+          <a class="mobile-menu-link" href="etica.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Código de Ética</a>
+          <a class="mobile-menu-link" data-mobile-menu-link href="#contact" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Solicitar Estatuto</a>
+          <a class="mobile-menu-link" href="transparencia.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Portal da Transparência</a>
+
+          <div style="padding: 10px 20px; margin-top: 10px; font-weight: bold; color: #ffcc00; text-transform: uppercase; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.1);">Base</div>
+          <a class="mobile-menu-link" data-mobile-menu-link href="#categories" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Nossas Categorias</a>
+          <a class="mobile-menu-link" href="comissao.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Comissão Técnica</a>
+          <a class="mobile-menu-link" href="metodologia.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Metodologia de Formação</a>
+          <a class="mobile-menu-link" href="peneiras.html" style="padding-left: 30px; font-size: 0.95rem; color: #d1d5db;">Peneiras e Avaliações</a>
+
+          <a class="mobile-menu-link" data-mobile-menu-link href="#pilar-iniciacao" style="margin-top: 10px;">Projeto Social</a>
+          <a class="mobile-menu-link" data-mobile-menu-link href="#contact">Contato</a>
+          
           <hr style="margin: 15px 0" />
-          <!-- WCAG fix: 4.1.2 -->
-          <button
-            class="mobile-menu-link"
-            type="button"
-            onclick="alternarCores()"
-            aria-pressed="false"
-            data-high-contrast-toggle
-          >
+          <button class="mobile-menu-link" type="button" onclick="alternarCores()" aria-pressed="false" data-high-contrast-toggle>
             🌗 Alto Contraste
           </button>
-          <!-- WCAG fix: 4.1.2 -->
-          <button
-            class="mobile-menu-link"
-            type="button"
-            onclick="aumentarFonte()"
-          >
+          <button class="mobile-menu-link" type="button" onclick="aumentarFonte()">
             𝐀+ Aumentar Fonte
           </button>
-          <!-- WCAG fix: 4.1.2 -->
-          <button
-            class="mobile-menu-link"
-            type="button"
-            onclick="diminuirFonte()"
-          >
+          <button class="mobile-menu-link" type="button" onclick="diminuirFonte()">
             𝐀- Diminuir Fonte
           </button>
         </div>
       </nav>
     </header>
+    
     <main>
       <section class="hero-section" id="hero">
         <div class="hero-media">
-          <img
-            alt="Comissão técnica do Esporte Clube Itapetininga durante um treino"
-            class="hero-image"
-            src="img/testehero.jpeg"
-          />
+          <img alt="Comissão técnica do Esporte Clube Itapetininga durante um treino" class="hero-image" src="img/testehero.jpeg" />
           <div class="hero-overlay"></div>
           <div class="hero-field-grid"></div>
         </div>
@@ -145,49 +230,44 @@
             .novo-estilo-fpf {
               display: flex;
               align-items: center;
-              justify-content: flex-start; /* Alinha à esquerda com o título */
+              justify-content: flex-start;
               gap: 10px;
               color: #ffcc00;
               font-family: 'Bebas Neue', sans-serif;
-              font-size: 1.25rem; /* Fonte menor */
+              font-size: 1.25rem;
               letter-spacing: 0.05em;
-              margin-top: 10px; /* Puxa para cima, colando no título */
+              margin-top: 10px;
               margin-bottom: 2rem;
             }
             .linha-amarela-fpf {
-              width: 50px; /* Traço menor */
+              width: 50px;
               height: 2px;
               background-color: #ffcc00;
               display: block;
             }
+            .hero-actions {
+              margin-top: -20px !important;
+            }
           </style>
-          
           <p class="novo-estilo-fpf">
             <span class="linha-amarela-fpf" aria-hidden="true"></span>
             <span>FILIADO À FEDERAÇÃO PAULISTA DE FUTEBOL</span>
             <span class="linha-amarela-fpf" aria-hidden="true"></span>
           </p>
-
-          <div class="hero-actions">
-            <a
-              class="hero-button hero-button-primary"
-              href="#apoie-modal"
-              data-modal-open
-              aria-label="Como apoiar o clube — abre janela com formas de apoio"
-            >
+          <!-- BOTÕES COM O MESMO TAMANHO E MAIORES -->
+          <div class="hero-actions" style="display: flex; gap: 1rem; width: 100%; max-width: 480px;">
+            <a class="hero-button hero-button-primary" href="#apoie-modal" data-modal-open aria-label="Como apoiar o clube — abre janela com formas de apoio" style="flex: 1; padding: 10px 20px; font-size: 1.1rem; justify-content: center; text-align: center;">
               Como Apoiar
-              <span class="material-symbols-outlined" aria-hidden="true"
-                >arrow_forward</span
-              >
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
-            <a class="hero-button hero-button-secondary" href="#history">
+            <a class="hero-button hero-button-secondary" href="#history" style="flex: 1; padding: 10px 20px; font-size: 1.1rem; justify-content: center; text-align: center;">
               Conheça a História
             </a>
           </div>
         </div>
       </section>
+
       <div class="gradient-flow-wrapper">
-        <div class="gradient-flow-wrapper">
         <section class="history-editorial screen-section" id="history" style="scroll-margin-top: -30px;">
           <div class="max-w-7xl mx-auto px-4 lg:px-8">
             <div class="history-story">
@@ -223,60 +303,32 @@
                   <article class="history-milestone">
                     <span>01</span>
                     <h3>Fundação</h3>
-                    <p>
-                      O clube nasceu em 26 de dezembro de 1950, ainda como DERAC
-                      - Departamento de Estradas de Rodagem Atlético Clube.
-                    </p>
+                    <p>O clube nasceu em 26 de dezembro de 1950, ainda como DERAC - Departamento de Estradas de Rodagem Atlético Clube.</p>
                   </article>
                   <article class="history-milestone">
                     <span>02</span>
                     <h3>Tradição Competitiva</h3>
-                    <p>
-                      Por décadas, participou dos campeonatos da Federação
-                      Paulista de Futebol nas divisões Série A2, Série A3 e
-                      Segunda Divisão de Profissionais.
-                    </p>
+                    <p>Por décadas, participou dos campeonatos da Federação Paulista de Futebol nas divisões Série A2, Série A3 e Segunda Divisão de Profissionais.</p>
                   </article>
                   <article class="history-milestone">
                     <span>03</span>
                     <h3>Nova Identidade</h3>
-                    <p>
-                      Em 1995, passou a se chamar Esporte Clube Itapetininga,
-                      fortalecendo o vínculo com a cidade.
-                    </p>
+                    <p>Em 1995, passou a se chamar Esporte Clube Itapetininga, fortalecendo o vínculo com a cidade.</p>
                   </article>
                   <article class="history-milestone">
                     <span>04</span>
                     <h3>Base e Futuro</h3>
-                    <p>
-                      Hoje, o foco está nas categorias de base e no futuro retorno ao profissional.
-                    </p>
+                    <p>Hoje, o foco está nas categorias de base e no futuro retorno ao profissional.</p>
                   </article>
                 </div>
-                <div
-                  class="history-archive"
-                  aria-label="Acervo visual do clube"
-                >
+                <div class="history-archive" aria-label="Acervo visual do clube">
                   <figure class="history-archive-main">
-                    <span
-                      class="history-archive-corner history-archive-corner--tl"
-                      aria-hidden="true"
-                    ></span>
-                    <span
-                      class="history-archive-corner history-archive-corner--br"
-                      aria-hidden="true"
-                    ></span>
-                    <img
-                      alt="Elenco histórico do Esporte Clube Itapetininga em campo, década de 1980"
-                      src="img/time2.jpeg"
-                    />
+                    <span class="history-archive-corner history-archive-corner--tl" aria-hidden="true"></span>
+                    <span class="history-archive-corner history-archive-corner--br" aria-hidden="true"></span>
+                    <img alt="Elenco histórico do Esporte Clube Itapetininga em campo, década de 1980" src="img/time2.jpeg" />
                     <figcaption class="history-archive-caption">
-                      <span class="history-archive-caption-tag"
-                        >Arquivo Histórico</span
-                      >
-                      <span class="history-archive-caption-detail"
-                        >Elenco em campo • registro do acervo do clube</span
-                      >
+                      <span class="history-archive-caption-tag">Arquivo Histórico</span>
+                      <span class="history-archive-caption-detail">Elenco em campo • registro do acervo do clube</span>
                     </figcaption>
                   </figure>
                 </div>
@@ -284,16 +336,11 @@
             </div>
           </div>
         </section>
-        <section
-          class="legends-editorial-section"
-          aria-label="Grandes nomes da história do clube"
-        >
+
+        <section class="legends-editorial-section" aria-label="Grandes nomes da história do clube">
           <div class="legends-editorial-inner">
             <div class="legends-editorial-heading">
-              <p class="legends-editorial-kicker">
-                Histórias que marcaram gerações
-              </p>
-              <!-- WCAG fix: 1.3.1 -->
+              <p class="legends-editorial-kicker">Histórias que marcaram gerações</p>
               <h2>
                 <span>Grandes Nomes</span>
                 <strong>Nossa História</strong>
@@ -302,16 +349,9 @@
                 <span></span>
               </div>
             </div>
-            <div
-              class="legends-editorial-wall"
-              aria-label="Mural histórico de grandes nomes"
-            >
-              <article
-                class="legend-editorial-piece legend-editorial-piece-vadao"
-              >
-                <span class="legend-editorial-index" aria-hidden="true"
-                  >01</span
-                >
+            <div class="legends-editorial-wall" aria-label="Mural histórico de grandes nomes">
+              <article class="legend-editorial-piece legend-editorial-piece-vadao">
+                <span class="legend-editorial-index" aria-hidden="true">01</span>
                 <img src="img/Vadao_2015.jpg" alt="Retrato de Vadão" />
                 <div class="legend-editorial-copy">
                   <span class="legend-editorial-role">Treinador</span>
@@ -320,12 +360,8 @@
                   <p>Ex-Técnico Seleção Brasileira Feminina</p>
                 </div>
               </article>
-              <article
-                class="legend-editorial-piece legend-editorial-piece-itabera"
-              >
-                <span class="legend-editorial-index" aria-hidden="true"
-                  >02</span
-                >
+              <article class="legend-editorial-piece legend-editorial-piece-itabera">
+                <span class="legend-editorial-index" aria-hidden="true">02</span>
                 <img src="img/itabera.jpg" alt="Retrato de Carlinhos Itaberá" />
                 <div class="legend-editorial-copy">
                   <span class="legend-editorial-role">Lateral</span>
@@ -334,12 +370,8 @@
                   <p>Ex-Fluminense</p>
                 </div>
               </article>
-              <article
-                class="legend-editorial-piece legend-editorial-piece-marquinho"
-              >
-                <span class="legend-editorial-index" aria-hidden="true"
-                  >03</span
-                >
+              <article class="legend-editorial-piece legend-editorial-piece-marquinho">
+                <span class="legend-editorial-index" aria-hidden="true">03</span>
                 <img src="img/marquinho.jpg" alt="Retrato de Marquinhos" />
                 <div class="legend-editorial-copy">
                   <span class="legend-editorial-role">Meia</span>
@@ -348,16 +380,9 @@
                   <p>Ex-Ferroviária de Araraquara</p>
                 </div>
               </article>
-              <article
-                class="legend-editorial-piece legend-editorial-piece-angatuba"
-              >
-                <span class="legend-editorial-index" aria-hidden="true"
-                  >04</span
-                >
-                <img
-                  src="img/carlinhos.webp"
-                  alt="Retrato de Carlinhos Angatuba"
-                />
+              <article class="legend-editorial-piece legend-editorial-piece-angatuba">
+                <span class="legend-editorial-index" aria-hidden="true">04</span>
+                <img src="img/carlinhos.webp" alt="Retrato de Carlinhos Angatuba" />
                 <div class="legend-editorial-copy">
                   <span class="legend-editorial-role">Atacante</span>
                   <h4>Carlinhos<br />Angatuba</h4>
@@ -368,505 +393,387 @@
             </div>
           </div>
         </section>
+
         <section class="archive-section">
           <div class="archive-inner">
             <aside class="archive-intro">
               <p class="archive-kicker">Arquivo Histórico</p>
               <h2>Nossa História em Imagens</h2>
-              <p>
-                Cada imagem guarda um capítulo da nossa trajetória dentro e fora
-                de campo.
-              </p>
+              <p>Cada imagem guarda um capítulo da nossa trajetória dentro e fora de campo.</p>
             </aside>
             <div class="archive-track-wrap">
-              <div
-                class="archive-track"
-                aria-label="Registros históricos do clube"
-              >
+              <div class="archive-track" aria-label="Registros históricos do clube">
                 <article class="archive-card">
                   <div class="archive-card-media">
-                    <img
-                      alt="Registro histórico das origens do clube como DERAC"
-                      src="img/1950.jpg"
-                    />
+                    <img alt="Registro histórico das origens do clube como DERAC" src="img/1950.jpg" />
                   </div>
                   <div class="archive-card-copy">
                     <h3>As Raízes</h3>
-                    <p>
-                      Os primeiros passos de uma história de sucesso.
-                    </p>
+                    <p>Os primeiros passos de uma história de sucesso.</p>
                   </div>
                 </article>
                 <article class="archive-card">
                   <div class="archive-card-media">
-                    <img
-                      alt="Registro da transição do DERAC para o Esporte Clube Itapetininga"
-                      src="img/time7.jpeg"
-                    />
+                    <img alt="Registro da transição do DERAC para o Esporte Clube Itapetininga" src="img/time7.jpeg" />
                   </div>
                   <div class="archive-card-copy">
                     <h3>Transição DERAC - ECI</h3>
-                    <p>
-                      O início de uma nova fase de competições.
-                    </p>
+                    <p>O início de uma nova fase de competições.</p>
                   </div>
                 </article>
                 <article class="archive-card">
                   <div class="archive-card-media">
-                    <img
-                      alt="Atletas da base no Campeonato Sul Paulista representando o legado atual"
-                      src="img/time4.jpeg"
-                    />
+                    <img alt="Atletas da base no Campeonato Sul Paulista representando o legado atual" src="img/time4.jpeg" />
                   </div>
                   <div class="archive-card-copy">
                     <h3>Legado Contínuo</h3>
-                    <p>
-                      Foco no desenvolvimento da base e projetos sociais
-                      transformadores.
-                    </p>
+                    <p>Foco no desenvolvimento da base e projetos sociais transformadores.</p>
                   </div>
                 </article>
               </div>
             </div>
           </div>
         </section>
-        
-       <!-- INÍCIO DA NOVA SEÇÃO BASE MODULAR -->
-<style>
-  /* Efeito de rolagem suave para a página inteira */
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 120px; /* Cria um espaço no topo para o menu não cobrir o título */
-  }
 
-  .nova-base-wrapper {
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-  }
-  .nova-base-page {
-    padding: 5rem 0;
-    min-height: 95vh; 
-    display: flex;
-    align-items: center; 
-  }
-  .nova-base-page-1 {
-    background-color: #0b1c3f; 
-  }
-  .nova-base-page-2 {
-    background-color: #12285a; 
-  }
-  .nova-base-page-3 {
-    background-color: #0b1c3f; 
-  }
-  .nova-base-container {
-    width: 100%;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .nova-base-kicker {
-    color: #ffcc00;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 1.25rem; 
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .nova-base-kicker::before {
-    content: '';
-    display: block;
-    width: 2rem;
-    height: 2px;
-    background-color: #ffcc00;
-  }
-  .nova-base-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 8vw, 5.5rem);
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-  .nova-base-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .nova-base-grid-2 { grid-template-columns: 1fr 1fr; gap: 5rem; }
-  }
-  .nova-base-grid-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: center; 
-  }
-  @media (min-width: 1024px) {
-    .nova-base-grid-layout { 
-      grid-template-columns: 1fr 2fr; 
-      gap: 4rem; 
-    }
-  }
+        <style>
+          html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 120px;
+          }
+          .nova-base-wrapper {
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+          }
+          .nova-base-page {
+            padding: 5rem 0;
+            min-height: 95vh; 
+            display: flex;
+            align-items: center; 
+          }
+          .nova-base-page-1 { background-color: #0b1c3f; }
+          .nova-base-page-2 { background-color: #12285a; }
+          .nova-base-page-3 { background-color: #0b1c3f; }
+          .nova-base-container {
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+          }
+          .nova-base-kicker {
+            color: #ffcc00;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 1.25rem; 
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+          }
+          .nova-base-kicker::before {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 2px;
+            background-color: #ffcc00;
+          }
+          .nova-base-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 8vw, 5.5rem);
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+          }
+          .nova-base-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+          }
+          @media (min-width: 1024px) {
+            .nova-base-grid-2 { grid-template-columns: 1fr 1fr; gap: 5rem; }
+          }
+          .nova-base-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center; 
+          }
+          @media (min-width: 1024px) {
+            .nova-base-grid-layout { 
+              grid-template-columns: 1fr 2fr; 
+              gap: 4rem; 
+            }
+          }
+          .nova-base-box {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px; 
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.15); 
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none; 
+            color: inherit; 
+          }
+          a.nova-base-box { cursor: pointer; }
+          .nova-base-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            width: 70%;
+            height: 2px;
+            background: radial-gradient(ellipse at center, rgba(255, 204, 0, 0.8) 0%, rgba(255, 204, 0, 0) 80%);
+            opacity: 0.8;
+            transition: all 0.4s ease;
+          }
+          .nova-base-box:hover {
+            border-color: rgba(255, 204, 0, 0.8);
+            background-color: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 15px 30px -15px rgba(255, 204, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px); 
+          }
+          .nova-base-box:hover::before {
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ffcc00;
+            opacity: 1;
+            box-shadow: 0 2px 10px rgba(255, 204, 0, 0.8);
+          }
+          .nova-base-box-amarelo {
+            background-color: #ffcc00;
+            color: #0b1c3f;
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+          }
+          .nova-base-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          @media (min-width: 768px) {
+            .nova-base-grid-3 { grid-template-columns: repeat(3, 1fr); }
+          }
+          .nova-base-cat-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+            line-height: 1;
+          }
+          .nova-base-imagem-container {
+            margin-top: 2.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          .nova-base-imagem-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+          }
+          .nova-base-imagem-container:hover img { transform: scale(1.05); }
+          .nova-base-imagem-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #ffcc00;
+          }
+        </style>
 
-  /* --- MÁGICA DOS BOXES COM BRILHO --- */
-  .nova-base-box {
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px; 
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.15); 
-    overflow: hidden;
-    transition: all 0.4s ease;
-    text-decoration: none; 
-    color: inherit; 
-  }
-
-  a.nova-base-box {
-    cursor: pointer;
-  }
-
-  .nova-base-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 15%;
-    width: 70%;
-    height: 2px;
-    background: radial-gradient(ellipse at center, rgba(255, 204, 0, 0.8) 0%, rgba(255, 204, 0, 0) 80%);
-    opacity: 0.8;
-    transition: all 0.4s ease;
-  }
-
-  .nova-base-box:hover {
-    border-color: rgba(255, 204, 0, 0.8);
-    background-color: rgba(255, 255, 255, 0.03);
-    box-shadow: inset 0 15px 30px -15px rgba(255, 204, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-3px); 
-  }
-
-  .nova-base-box:hover::before {
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #ffcc00;
-    opacity: 1;
-    box-shadow: 0 2px 10px rgba(255, 204, 0, 0.8);
-  }
-
-  .nova-base-box-amarelo {
-    background-color: #ffcc00;
-    color: #0b1c3f;
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 1.25rem;
-  }
-  .nova-base-grid-3 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  @media (min-width: 768px) {
-    .nova-base-grid-3 { grid-template-columns: repeat(3, 1fr); }
-  }
-  .nova-base-cat-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-    line-height: 1;
-  }
-  .nova-base-imagem-container {
-    margin-top: 2.5rem;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .nova-base-imagem-container img {
-    width: 100%;
-    height: auto;
-    /* aspect-ratio e object-fit removidos para a foto do time caber perfeitamente sem cortes */
-    display: block;
-    transition: transform 0.6s ease;
-  }
-  .nova-base-imagem-container:hover img {
-    transform: scale(1.05); 
-  }
-  .nova-base-imagem-container::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-color: #ffcc00;
-  }
-</style>
-
-<div id="categories" class="nova-base-wrapper" style="scroll-margin-top: -30px;">
-  
-  <!-- PÁGINA 1: Introdução -->
-  <section class="nova-base-page nova-base-page-1">
-    <div class="nova-base-container">
-      <div class="nova-base-grid-2">
-        <div>
-          <p class="nova-base-kicker">Formação Integral</p>
-          <h2 class="nova-base-title">Futebol de<br>Base</h2>
-          <p style="font-size: 1.125rem; color: #e5e7eb; border-left: 4px solid #ffcc00; padding-left: 1rem; font-style: italic;">
-            "Formando cidadãos através do esporte e desenvolvendo atletas com metodologia científica e sistêmica."
-          </p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 2rem;">
-  <div class="nova-base-box" style="text-align: center; cursor: default;">
-    <p style="font-size: 1.125rem; font-weight: bold; text-transform: uppercase; margin: 0; position: relative; z-index: 2;">
-      <span style="color: #ffcc00;">O Esporte Clube Itapetininga</span><br><br>desenvolve a sua base através de duas frentes complementares:
-    </p>
-  </div>
-          <div style="text-align: center;">
-            <h3 style="color: #ffcc00; font-size: 1.875rem; font-weight: bold; margin-bottom: 1.5rem;">Nossos Pilares</h3>
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-              
-              <!-- LINK PARA A PÁGINA 2 -->
-              <a href="#pilar-iniciacao" class="nova-base-box" style="scroll-margin-top: -30px;">
-                <p style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1.125rem; margin: 0; position: relative; z-index: 2; color: #ffffff;">Projeto<br>Iniciação Esportiva e Inclusão Social</p>
-              </a>
-              
-              <!-- LINK PARA A PÁGINA 3 -->
-              <a href="#pilar-rendimento" class="nova-base-box">
-                <p style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1.125rem; color: #ffcc00; margin: 0; position: relative; z-index: 2;">Alto Rendimento e Especialização Tática<br><br></p>
-              </a>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PÁGINA 2: Iniciação & Inclusão -->
-  <section id="pilar-iniciacao" class="nova-base-page nova-base-page-2" style="scroll-margin-top: -30px;">
-    <div class="nova-base-container">
-      <div class="nova-base-grid-layout">
-        <!-- Coluna da Esquerda -->
-        <div>
-          <p class="nova-base-kicker">Iniciação & Inclusão</p>
-          <h2 class="nova-base-title">Futebol de<br>Base</h2>
-          <p style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 1.875rem; letter-spacing: 0.05em;">INSCRIÇÕES GRATUITAS</p>
-          
-          <!-- IMAGEM DA PÁGINA 2 -->
-          <div class="nova-base-imagem-container">
-            <img src="img/time5.jpeg" alt="Projeto Social EC Itapetininga" />
-          </div>
-          
-        </div>
-        <!-- Coluna da Direita -->
-        <div>
-          <div class="nova-base-box" style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; cursor: default;">
-            <h3 style="color: #ffcc00; font-size: 1.25rem; font-weight: bold; text-transform: uppercase; margin: 0; position: relative; z-index: 2;">
-              Projeto de Iniciação Esportiva e Inclusão Social
-            </h3>
-          </div>
-          <div class="nova-base-grid-3">
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Iniciação Técnica</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 11</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no desenvolvimento motor, cognitivo e no aprendizado dos fundamentos básicos.</p>
-            </div>
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Desenvolvimento</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 13</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no aperfeiçoamento técnico, controle de bola sob pressão e iniciação tática.</p>
-            </div>
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Inclusão Contínua</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 15 <span style="font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 400;">(Social)</span></h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na permanência no esporte, saúde e cidadania, garantindo a continuação do desenvolvimento.</p>
-            </div>
-          </div>
-          <p style="font-size: 1rem; color: #9ca3af; margin-top: 1.5rem; line-height: 1.6; text-align: justify;">
-            O Projeto do EC Itapetininga une a iniciação esportiva qualificada à inclusão social, utilizando o futebol como ferramenta pedagógica e de cidadania. Nosso foco vai além das quatro linhas: acolhemos jovens em um ambiente seguro, estimulando a disciplina, o respeito e a resiliência. Mais do que formar atletas através de treinamentos estruturados, trabalhamos para blindar o futuro da nossa juventude, <strong>combatendo a ociosidade e transformando vidas com dignidade e saúde.</strong>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PÁGINA 3: Alto Rendimento -->
-  <section id="pilar-rendimento" class="nova-base-page nova-base-page-3" style="scroll-margin-top: -30px;">
-    <div class="nova-base-container">
-      <div class="nova-base-grid-layout">
-        <!-- Coluna da Esquerda -->
-        <div>
-          <p class="nova-base-kicker">Formação de Atletas</p>
-          <h2 class="nova-base-title">Futebol de<br>Base</h2>
-          <p style="font-size: 1.125rem; color: #e5e7eb; border-left: 4px solid #ffcc00; padding-left: 1rem; font-style: italic;">
-            "Desenvolvendo talentos locais e da região com metodologia <strong>sistêmica e científica</strong>, garantindo acesso democrático ao esporte de alto nível."
-          </p>
-          
-          <!-- IMAGEM DA PÁGINA 3 (Ajustada para a nova imagem do time) -->
-          <div class="nova-base-imagem-container">
-            <img src="img/time8.jpeg" alt="Alto Rendimento EC Itapetininga" />
-          </div>
-          
-        </div>
-        <!-- Coluna da Direita -->
-        <div>
-          <div class="nova-base-box-amarelo">
-            Alto Rendimento e Especialização Tática
-          </div>
-          <div class="nova-base-grid-3">
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Rendimento</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 15</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no rendimento absoluto, ingresso ao futebol competitivo e introdução à tática e ao modelo de jogo.</p>
-            </div>
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Especialização</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 17</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na cultura tática e coletiva da equipe e na máxima exigência competitiva para o rendimento de elite.</p>
-            </div>
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Alta Performance</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 20</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na transição para o profissional, atuando em alta performance sob máxima exigência física, tática e mental.</p>
-            </div>
-          </div>
-          
-          <div style="margin-top: 2rem;">
-            <div style="border: 1px solid #ffcc00; border-radius: 6px; padding: 0.5rem; text-align: center; margin-bottom: 1rem;">
-              <h3 style="color: #ffcc00; font-size: 1rem; font-weight: bold; text-transform: uppercase; margin: 0;">Projeto Futuro</h3>
-            </div>
-            <div class="nova-base-box" style="cursor: default;">
-              <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Projeção Profissional</span>
-              <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 23</h4>
-              <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Projeto futuro e estratégico para transição final dos atletas servindo de vitrine para o mercado e investidores.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-      </div>
-      <section
-        class="screen-section py-24 bg-surface-container-lowest"
-        id="contact"
-        style="scroll-margin-top: -30px;"
-      >
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
-            
-            <!-- COLUNA DA ESQUERDA (Textos, Ícones e Mapa Original) -->
-            <div>
-              <h2 class="text-headline-lg text-primary-container mb-6">
-                Fale Conosco
-              </h2>
-              <p class="text-on-surface-variant mb-12">
-                Estamos à disposição para esclarecer dúvidas sobre treinos,
-                parcerias ou doações.
-              </p>
-              
-              <div class="space-y-8 mb-12">
-                <!-- Sede Social (Ocupa a linha toda) -->
-                <div class="flex gap-4 items-center">
-                  <span
-                    class="material-symbols-outlined text-primary-container text-3xl"
-                    >location_on</span
-                  >
-                  <div>
-                    <p class="font-bold text-primary-container">Centro de Treinamento</p>
-                    <p class="text-on-surface-variant">
-                      R. Ana Maria Ferreira Baltazar, 705 - Jardim Shangri-La<br>Itapetininga - SP, 18208-580
+        <div id="categories" class="nova-base-wrapper" style="scroll-margin-top: -30px;">
+          <!-- PÁGINA 1: Introdução -->
+          <section class="nova-base-page nova-base-page-1">
+            <div class="nova-base-container">
+              <div class="nova-base-grid-2">
+                <div>
+                  <p class="nova-base-kicker">Formação Integral</p>
+                  <h2 class="nova-base-title">Futebol de<br>Base</h2>
+                  <p style="font-size: 1.125rem; color: #e5e7eb; border-left: 4px solid #ffcc00; padding-left: 1rem; font-style: italic;">
+                    "Formando cidadãos através do esporte e desenvolvendo talentos com metodologia científica e sistêmica."
+                  </p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                  <div class="nova-base-box" style="text-align: center; cursor: default;">
+                    <p style="font-size: 1.125rem; font-weight: bold; text-transform: uppercase; margin: 0; position: relative; z-index: 2;">
+                      <span style="color: #ffcc00;">O Esporte Clube Itapetininga</span><br><br>desenvolve a sua base através de duas frentes complementares:
                     </p>
                   </div>
-                </div>
-                
-                <!-- Grade para E-mail e Instagram Lado a Lado -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <!-- E-mail -->
-                  <div class="flex gap-4 items-center">
-                    <span
-                      class="material-symbols-outlined text-primary-container text-3xl"
-                      >mail</span
-                    >
-                    <div>
-                      <p class="font-bold text-primary-container">E-mail</p>
-                      <p class="text-on-surface-variant">
-                        contato@ecitapetininga.com.br
-                      </p>
+                  <div style="text-align: center;">
+                    <h3 style="color: #ffcc00; font-size: 1.875rem; font-weight: bold; margin-bottom: 1.5rem;">Nossos Pilares</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                      <a href="#pilar-iniciacao" class="nova-base-box" style="scroll-margin-top: -30px;">
+                        <p style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1.125rem; margin: 0; position: relative; z-index: 2; color: #ffffff;">Projeto<br>Iniciação Esportiva e Inclusão Social</p>
+                      </a>
+                      <a href="#pilar-rendimento" class="nova-base-box">
+                        <p style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 1.125rem; color: #ffcc00; margin: 0; position: relative; z-index: 2;">Alto Rendimento e Especialização Tática<br><br></p>
+                      </a>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-                  <!-- Instagram -->
+          <!-- PÁGINA 2: Iniciação & Inclusão -->
+          <section id="pilar-iniciacao" class="nova-base-page nova-base-page-2" style="scroll-margin-top: -30px;">
+            <div class="nova-base-container">
+              <div class="nova-base-grid-layout">
+                <div>
+                  <p class="nova-base-kicker">Iniciação & Inclusão</p>
+                  <h2 class="nova-base-title">Futebol de<br>Base</h2>
+                  <p style="color: #ffcc00; font-family: 'Bebas Neue', sans-serif; font-size: 1.875rem; letter-spacing: 0.05em;">INSCRIÇÕES GRATUITAS</p>
+                  <div class="nova-base-imagem-container">
+                    <img src="img/time6.png" alt="Projeto Social EC Itapetininga" />
+                  </div>
+                </div>
+                <div>
+                  <div class="nova-base-box" style="text-align: center; margin-bottom: 1.5rem; padding: 1rem; cursor: default;">
+                    <h3 style="color: #ffcc00; font-size: 1.25rem; font-weight: bold; text-transform: uppercase; margin: 0; position: relative; z-index: 2;">
+                      Projeto de Iniciação Esportiva e Inclusão Social
+                    </h3>
+                  </div>
+                  <div class="nova-base-grid-3">
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Iniciação Técnica</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 11</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no desenvolvimento motor, cognitivo e no aprendizado dos fundamentos básicos.</p>
+                    </div>
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Desenvolvimento</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 13</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no aperfeiçoamento técnico, controle de bola sob pressão e iniciação tática.</p>
+                    </div>
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Inclusão Contínua</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 15 <span style="font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 400;">(Social)</span></h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na permanência no esporte, saúde e cidadania, garantindo a continuação do desenvolvimento.</p>
+                    </div>
+                  </div>
+                  <p style="font-size: 1rem; color: #9ca3af; margin-top: 1.5rem; line-height: 1.6; text-align: justify;">
+                    O Projeto do EC Itapetininga une a iniciação esportiva qualificada à inclusão social, utilizando o futebol como ferramenta pedagógica e de cidadania. Nosso foco vai além das quatro linhas: acolhemos jovens em um ambiente seguro, estimulando a disciplina, o respeito e a resiliência. Mais do que formar atletas através de treinamentos estruturados, trabalhamos para blindar o futuro da nossa juventude, <strong>combatendo a ociosidade e transformando vidas com dignidade e saúde.</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- PÁGINA 3: Alto Rendimento -->
+          <section id="pilar-rendimento" class="nova-base-page nova-base-page-3" style="scroll-margin-top: -30px;">
+            <div class="nova-base-container">
+              <div class="nova-base-grid-layout">
+                <div>
+                  <p class="nova-base-kicker">Formação de Atletas</p>
+                  <h2 class="nova-base-title">Futebol de<br>Base</h2>
+                  <p style="font-size: 1.125rem; color: #e5e7eb; border-left: 4px solid #ffcc00; padding-left: 1rem; font-style: italic;">
+                    "Desenvolvendo talentos locais e da região com metodologia <strong>sistêmica e científica</strong>, garantindo acesso democrático ao esporte de alto nível."
+                  </p>
+                  <div class="nova-base-imagem-container">
+                    <img src="img/time8.jpeg" alt="Alto Rendimento EC Itapetininga" />
+                  </div>
+                </div>
+                <div>
+                  <div class="nova-base-box-amarelo">
+                    Alto Rendimento e Especialização Tática
+                  </div>
+                  <div class="nova-base-grid-3">
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Rendimento</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 15</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco no rendimento absoluto, ingresso ao futebol competitivo e introdução à tática e ao modelo de jogo.</p>
+                    </div>
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Especialização</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 17</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na cultura tática e coletiva da equipe e na máxima exigência competitiva para o rendimento de elite.</p>
+                    </div>
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Alta Performance</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 20</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Foco na transição para o profissional, atuando em alta performance sob máxima exigência física, tática e mental.</p>
+                    </div>
+                  </div>
+                  <div style="margin-top: 2rem;">
+                    <div style="border: 1px solid #ffcc00; border-radius: 6px; padding: 0.5rem; text-align: center; margin-bottom: 1rem;">
+                      <h3 style="color: #ffcc00; font-size: 1rem; font-weight: bold; text-transform: uppercase; margin: 0;">Projeto Futuro</h3>
+                    </div>
+                    <div class="nova-base-box" style="cursor: default;">
+                      <span style="font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: #9ca3af; position: relative; z-index: 2;">Projeção Profissional</span>
+                      <h4 class="nova-base-cat-title" style="position: relative; z-index: 2;">SUB 23</h4>
+                      <p style="font-size: 0.875rem; color: #d1d5db; margin: 0; position: relative; z-index: 2;">Projeto futuro e estratégico para transição final dos atletas servindo de vitrine para o mercado e investidores.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section class="screen-section py-24 bg-surface-container-lowest" id="contact" style="scroll-margin-top: -30px;">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+            <div>
+              <h2 class="text-headline-lg text-primary-container mb-6">Fale Conosco</h2>
+              <p class="text-on-surface-variant mb-12">Estamos à disposição para esclarecer dúvidas sobre treinos, parcerias ou doações.</p>
+              
+              <div class="space-y-8 mb-12">
+                <div class="flex gap-4 items-center">
+                  <span class="material-symbols-outlined text-primary-container text-3xl">location_on</span>
+                  <div>
+                    <p class="font-bold text-primary-container">Centro de Treinamento</p>
+                    <p class="text-on-surface-variant">R. Ana Maria Ferreira Baltazar, 705 - Jardim Shangri-La<br>Itapetininga - SP, 18208-580</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div class="flex gap-4 items-center">
-                    <span
-                      class="material-symbols-outlined text-primary-container text-3xl"
-                      >alternate_email</span
-                    >
+                    <span class="material-symbols-outlined text-primary-container text-3xl">mail</span>
+                    <div>
+                      <p class="font-bold text-primary-container">E-mail</p>
+                      <p class="text-on-surface-variant">contato@ecitapetininga.com.br</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4 items-center">
+                    <span class="material-symbols-outlined text-primary-container text-3xl">alternate_email</span>
                     <div>
                       <p class="font-bold text-primary-container">Instagram</p>
                       <p class="text-on-surface-variant">
-                        <a href="https://www.instagram.com/ecitape_oficial/" target="_blank" class="hover:text-primary-container font-medium transition-colors">
-                          @ecitapetininga
-                        </a>
+                        <a href="https://www.instagram.com/ecitape_oficial/" target="_blank" class="hover:text-primary-container font-medium transition-colors">@ecitapetininga</a>
                       </p>
                     </div>
                   </div>
-               <!-- NOVO: Horário de Atendimento -->
                   <div class="flex gap-4 items-center">
-                    <span
-                      class="material-symbols-outlined text-primary-container text-3xl"
-                      >schedule</span
-                    >
+                    <span class="material-symbols-outlined text-primary-container text-3xl">schedule</span>
                     <div>
                       <p class="font-bold text-primary-container">Atendimento</p>
-                      <p class="text-on-surface-variant">
-                        Seg. a Sex., 9h às 17h
-                      </p>
+                      <p class="text-on-surface-variant">Seg. a Sex., 9h às 17h</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- Mapa Original -->
-              <div
-                class="h-64 rounded-lg overflow-hidden border border-outline-variant"
-              >
-                <!-- WCAG fix: 1.1.1 -->
-                <iframe
-                  title="Localização da sede do EC Itapetininga"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.0!2d-48.0561!3d-23.5825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRua+Ana+Maria+Ferreira+Baltazar%2C+Jardim+Shangri-La%2C+Itapetininga+-+SP!5e0!3m2!1spt-BR!2sbr!4v1"
-                  width="100%"
-                  height="100%"
-                  style="border: 0"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  aria-label="Mapa de localização do EC Itapetininga em Itapetininga, SP"
-                ></iframe>
+              <div class="h-64 rounded-lg overflow-hidden border border-outline-variant">
+                <iframe title="Localização da sede do EC Itapetininga" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.0!2d-48.0561!3d-23.5825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRua+Ana+Maria+Ferreira+Baltazar%2C+Jardim+Shangri-La%2C+Itapetininga+-+SP!5e0!3m2!1spt-BR!2sbr!4v1" width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Mapa de localização do EC Itapetininga em Itapetininga, SP"></iframe>
               </div>
             </div>
 
-            <!-- COLUNA DA DIREITA (Formulário Original com Borda Cinza) -->
-            <div
-              class="bg-surface-container-low p-10 rounded-lg" 
-              style="border: 2px solid #9ca3af;"
-            >
-              <!-- Formulário atualizado com FormSubmit -->
+            <div class="bg-surface-container-low p-10 rounded-lg" style="border: 2px solid #9ca3af;">
               <form action="https://formsubmit.co/ajax/976c4eef3a206d60322c86e53f2fd8e5" method="POST" class="space-y-6" id="contact-form">
-                
-                <!-- Configurações ocultas do FormSubmit -->
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="Novo contato pelo site do Clube!">
                 
@@ -874,21 +781,19 @@
                   <label for="contact-name" class="text-xs font-bold text-primary-container uppercase mb-2 block tracking-wider">Nome completo</label>
                   <input id="contact-name" name="Nome" class="w-full rounded-lg border border-outline-variant focus:border-primary-container focus:ring-1 focus:ring-primary-container bg-white p-4" placeholder="Como podemos te chamar?" required type="text" />
                 </div>
-                
                 <div>
                   <label for="contact-email" class="text-xs font-bold text-primary-container uppercase mb-2 block tracking-wider">E-mail</label>
                   <input id="contact-email" name="Email" class="w-full rounded-lg border border-outline-variant focus:border-primary-container focus:ring-1 focus:ring-primary-container bg-white p-4" placeholder="seu@email.com" required type="email" />
                 </div>
-                
                 <div>
                   <label for="contact-subject" class="text-xs font-bold text-primary-container uppercase mb-2 block tracking-wider">Assunto</label>
                   <select id="contact-subject" name="Assunto" class="w-full rounded-lg border border-outline-variant focus:border-primary-container focus:ring-1 focus:ring-primary-container bg-white p-4">
                     <option>Quero patrocinar</option>
                     <option>Inscrição na base</option>
+                    <option>Solicitar Estatuto Social</option>
                     <option>Outro</option>
                   </select>
                 </div>
-                
                 <div>
                   <label for="contact-message" class="text-xs font-bold text-primary-container uppercase mb-2 block tracking-wider">Mensagem</label>
                   <textarea id="contact-message" name="Mensagem" class="w-full rounded-lg border border-outline-variant focus:border-primary-container focus:ring-1 focus:ring-primary-container bg-white p-4" placeholder="Escreva aqui sua mensagem..." required rows="4"></textarea>
@@ -904,314 +809,136 @@
         </div>
       </section>
     </main>
-    <!-- Modal: Apoie o Clube -->
-    <div
-      id="apoie-modal"
-      aria-hidden="true"
-      aria-modal="true"
-      aria-labelledby="apoie-modal-title"
-      class="support-modal fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary-container/40 backdrop-blur-sm"
-      data-modal
-      role="dialog"
-    >
-      <div
-        class="support-modal-panel relative w-full max-w-4xl bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row"
-      >
-        <button
-          type="button"
-          aria-label="Fechar modal"
-          data-modal-close
-          class="absolute top-4 right-4 z-20 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors"
-        >
+
+    <!-- MODAL APOIE O CLUBE -->
+    <div id="apoie-modal" aria-hidden="true" aria-modal="true" aria-labelledby="apoie-modal-title" class="support-modal fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary-container/40 backdrop-blur-sm" data-modal role="dialog">
+      <div class="support-modal-panel relative w-full max-w-4xl bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row">
+        <button type="button" aria-label="Fechar modal" data-modal-close class="absolute top-4 right-4 z-20 bg-black/20 hover:bg-black/40 text-white rounded-full p-2 transition-colors">
           <span class="material-symbols-outlined">close</span>
         </button>
-        <!-- Modal Esquerda: Visual -->
         <div class="md:w-1/2 relative min-h-[300px]">
-          <img
-            alt="Esporte Clube Itapetininga Base"
-            class="absolute inset-0 w-full h-full object-cover"
-            src="img/time5.jpeg"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent flex items-end p-8"
-          >
+          <img alt="Esporte Clube Itapetininga Base" class="absolute inset-0 w-full h-full object-cover" src="img/time6.png" />
+          <div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent flex items-end p-8">
             <p class="font-bold italic" style="color: #ffffff; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); padding: 30px; display: block;">
                 Seu apoio fomenta a inclusão e o desenvolvimento de talentos locais e regionais.
             </p>
           </div>
         </div>
-        <!-- Modal Direita: Conteúdo -->
         <div class="md:w-1/2 p-10 flex flex-col justify-center">
-         <span
-            class="text-secondary-container font-bold uppercase tracking-widest mb-2 text-center block"
-            style="font-size: 18px;"
-          >
-            Impacto social
-          </span>
-          <h2
-            id="apoie-modal-title"
-            class="text-headline-md text-primary-container mb-4 leading-tight"
-          >
-            Apoie os sonhos da nossa base
-          </h2>
-          <p class="text-on-surface-variant mb-8 text-sm">
-            Sua contribuição garante que centenas de jovens continuem tendo
-            acesso a treinamentos de alto nível, equipamentos de qualidade e
-            suporte social completo.
-          </p>
+          <span class="text-secondary-container font-bold uppercase tracking-widest mb-2 text-center block" style="font-size: 18px;">Impacto social</span>
+          <h2 id="apoie-modal-title" class="text-headline-md text-primary-container mb-4 leading-tight">Apoie os sonhos da nossa base</h2>
+          <p class="text-on-surface-variant mb-8 text-sm">Sua contribuição garante que centenas de jovens continuem tendo acesso a treinamentos de alto nível, equipamentos de qualidade e suporte social completo.</p>
           <div class="space-y-4 mb-8">
-            <div
-              class="bg-surface-container-low p-4 rounded-lg border border-outline-variant flex items-center gap-4"
-            >
-              <span class="material-symbols-outlined text-primary-container"
-                >payments</span
-              >
+            <div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant flex items-center gap-4">
+              <span class="material-symbols-outlined text-primary-container">payments</span>
               <div>
-                <p class="text-xs text-primary-container font-bold uppercase">
-                  PIX/CNPJ
-                </p>
-                <p class="font-mono text-on-surface select-all">
-                  01.077.813/0001-42
-                </p>
+                <p class="text-xs text-primary-container font-bold uppercase">PIX/CNPJ</p>
+                <p class="font-mono text-on-surface select-all">01.077.813/0001-42</p>
               </div>
             </div>
-            <div class="text-center text-xs text-on-surface-variant italic">
-              Entre em contato para planos de patrocínio empresarial.
-            </div>
+            <div class="text-center text-xs text-on-surface-variant italic">Entre em contato para planos de patrocínio empresarial.</div>
           </div>
-          <button
-            type="button"
-            data-modal-close
-            class="block text-center bg-secondary-container text-on-secondary-container w-full py-4 rounded-lg font-bold uppercase shadow-lg hover:bg-secondary-fixed transition-all"
-          >
+          <button type="button" data-modal-close class="block text-center bg-secondary-container text-on-secondary-container w-full py-4 rounded-lg font-bold uppercase shadow-lg hover:bg-secondary-fixed transition-all">
             Fechar
           </button>
         </div>
       </div>
     </div>
-<style>
-  .novo-footer {
-    background-color: #0b1c3f;
-    color: #ffffff;
-    padding: 4rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-family: 'Inter', sans-serif;
-  }
-  .novo-footer-container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .novo-footer-top {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    margin-bottom: 3rem;
-  }
-  .novo-footer-col-1 {
-    flex: 2;
-    min-width: 280px;
-  }
-  .novo-footer-col-2, .novo-footer-col-3 {
-    flex: 1;
-    min-width: 200px;
-  }
-  .novo-footer-logo {
-    height: 100px; /* Limita o tamanho do logo do time */
-    width: auto;
-    margin-bottom: 1.5rem;
-  }
-  .novo-footer-link {
-    color: #d1d5db;
-    text-decoration: none;
-    transition: color 0.3s;
-    display: block;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-  }
-  .novo-footer-link:hover {
-    color: #ffcc00;
-  }
-  .novo-footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 3rem;
-    margin-bottom: 2rem;
-  }
-  .novo-footer-apoio {
-    flex: 1;
-    min-width: 280px;
-  }
-  .novo-footer-patroc {
-    flex: 1.5;
-    min-width: 300px;
-  }
-  .novo-footer-title {
-    color: #ffcc00;
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-  }
-  .novo-footer-img-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-  }
-  .img-apoio {
-    height: 70px; /* Tamanho controlado para as imagens de apoio */
-    width: auto;
-    object-fit: contain;
-  }
-  .img-patroc {
-    height: 50px; /* Tamanho controlado para os patrocinadores */
-    width: auto;
-    object-fit: contain;
-  }
-  /* Borda sutil para as imagens vazias, para você saber onde elas estão */
-  .img-placeholder {
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    padding: 4px;
-  }
-  .novo-footer-copy {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-size: 0.75rem;
-    color: #9ca3af;
-    gap: 1rem;
-  }
-</style>
 
-<footer class="novo-footer">
-  <div class="novo-footer-container">
+    <!-- RODAPÉ OFICIAL -->
+    <style>
+      .novo-footer { background-color: #0b1c3f; color: #ffffff; padding: 4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); font-family: 'Inter', sans-serif; }
+      .novo-footer-container { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+      .novo-footer-top { display: flex; flex-wrap: wrap; gap: 3rem; margin-bottom: 3rem; }
+      .novo-footer-col-1 { flex: 2; min-width: 280px; }
+      .novo-footer-col-2, .novo-footer-col-3 { flex: 1; min-width: 200px; }
+      .novo-footer-logo { height: 100px; width: auto; margin-bottom: 1.5rem; }
+      .novo-footer-link { color: #d1d5db; text-decoration: none; transition: color 0.3s; display: block; margin-bottom: 1rem; font-size: 0.875rem; }
+      .novo-footer-link:hover { color: #ffcc00; }
+      .novo-footer-bottom { display: flex; flex-wrap: wrap; gap: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 3rem; margin-bottom: 2rem; }
+      .novo-footer-apoio { flex: 1; min-width: 280px; }
+      .novo-footer-patroc { flex: 1.5; min-width: 300px; }
+      .novo-footer-title { color: #ffcc00; font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 500; }
+      .novo-footer-img-group { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+      .img-apoio { height: 70px; width: auto; object-fit: contain; }
+      .img-patroc { height: 50px; width: auto; object-fit: contain; }
+      .img-placeholder { border: 1px dashed rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 4px; }
+      .novo-footer-copy { display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.75rem; color: #9ca3af; gap: 1rem; }
+    </style>
 
-    <!-- BLOCO 1: Informações e Links -->
-    <div class="novo-footer-top">
-      <!-- Coluna 1: Logo e Texto -->
-      <div class="novo-footer-col-1">
-        <img src="img/eci.png" alt="Logo EC Itapetininga" class="novo-footer-logo" />
-        <p style="color: #e5e7eb; font-size: 0.875rem; max-width: 300px; line-height: 1.5; margin-bottom: 1.5rem;">
-          Formando atletas e cidadãos desde 1950. O maior patrimônio esportivo de Itapetininga.
-        </p>
-        <div style="color: #d1d5db; font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem;">
-          <p>CNPJ: 01.077.813/0001-42</p>
-          <br>
+    <footer class="novo-footer">
+      <div class="novo-footer-container">
+        <div class="novo-footer-top">
+          <div class="novo-footer-col-1">
+            <img src="img/eci.png" alt="Logo EC Itapetininga" class="novo-footer-logo" />
+            <p style="color: #e5e7eb; font-size: 0.875rem; max-width: 300px; line-height: 1.5; margin-bottom: 1.5rem;">Formando atletas e cidadãos desde 1950. O maior patrimônio esportivo de Itapetininga.</p>
+            <div style="color: #d1d5db; font-size: 0.875rem; line-height: 1.6; margin-bottom: 1rem;">
+              <p>CNPJ: 01.077.813/0001-42</p><br>
+            </div>
+           <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; align-items: center;">
+              <a href="https://www.instagram.com/ecitape_oficial/" target="_blank" class="novo-footer-link" style="display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">alternate_email</span> Instagram
+              </a>
+              <a href="#" onclick="if(navigator.share){navigator.share({title: 'Esporte Clube Itapetininga', url: window.location.href})}else{alert('Copie o link do navegador para compartilhar!')}; return false;" class="novo-footer-link" style="display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">share</span> Compartilhar
+              </a>
+              <a href="https://futebolpaulista.com.br/" target="_blank" style="display: flex; align-items: center; margin-bottom: 0; transition: transform 0.3s;" title="Filiado à Federação Paulista de Futebol" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <img src="img/fpf.jpg" alt="Selo FPF" style="height: 35px; width: auto; border-radius: 4px;" />
+              </a>
+            </div>
+          </div>
+          <div class="novo-footer-col-2">
+            <h4 style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; margin-bottom: 1.5rem;">Navegação</h4>
+            <a href="#hero" class="novo-footer-link">Início</a>
+            <a href="#history" class="novo-footer-link">Nossa História</a>
+            <a href="diretoria.html" class="novo-footer-link">Diretoria</a>
+            <a href="#categories" class="novo-footer-link">Categorias de Base</a>
+            <a href="#pilar-iniciacao" class="novo-footer-link">Projeto Social</a>
+            <a href="#contact" class="novo-footer-link">Contato</a>
+          </div>
+          <div class="novo-footer-col-3">
+            <h4 style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; margin-bottom: 1.5rem;">Informações Legais</h4>
+            <a href="governanca.html" class="novo-footer-link">Garantias e Governança</a>
+            <a href="transparencia.html" class="novo-footer-link">Portal da Transparência</a>
+            <a href="etica.html" class="novo-footer-link">Código de Ética</a>
+            <a href="#contact" class="novo-footer-link">Estatuto Social</a>
+            <a href="privacidade.html" class="novo-footer-link">Política de Privacidade</a>
+          </div>
         </div>
-       <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; align-items: center;">
-          
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/ecitape_oficial/" target="_blank" class="novo-footer-link" style="display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0;">
-            <span class="material-symbols-outlined" style="font-size: 20px;">alternate_email</span>
-            Instagram
-          </a>
-
-          <!-- Botão Compartilhar (Usa o sistema nativo do celular) -->
-          <a href="#" onclick="if(navigator.share){navigator.share({title: 'Esporte Clube Itapetininga', url: window.location.href})}else{alert('Copie o link do navegador para compartilhar!')}; return false;" class="novo-footer-link" style="display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0;">
-            <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
-            Compartilhar
-          </a>
-
-          <!-- Logo / Link da FPF (Agora com a imagem fpf.jpg) -->
-          <a href="https://futebolpaulista.com.br/" target="_blank" style="display: flex; align-items: center; margin-bottom: 0; transition: transform 0.3s;" title="Filiado à Federação Paulista de Futebol" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="img/fpf.jpg" alt="Selo FPF" style="height: 35px; width: auto; border-radius: 4px;" />
-          </a>
-
+        <div class="novo-footer-bottom">
+          <div class="novo-footer-apoio">
+            <h4 class="novo-footer-title">Apoio:</h4>
+            <div class="novo-footer-img-group">
+              <img src="img/adfmi-footer.png" alt="Apoio ADFMI" class="img-apoio" />
+              <img src="img.png" alt="" class="img-apoio" />
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-apoio " />
+            </div>
+          </div>
+          <div class="novo-footer-patroc">
+            <h4 class="novo-footer-title">Patrocinadores:</h4>
+            <div class="novo-footer-img-group">
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-patroc img-placeholder" />
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
+              <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-patroc img-placeholder" />
+            </div>
+          </div>
+        </div>
+        <div class="novo-footer-copy">
+          <p>© 2026 Esporte Clube Itapetininga. Todos os direitos reservados.</p>
+          <p style="font-style: italic;">Orgulho da nossa cidade.</p>
         </div>
       </div>
+    </footer>
 
-     <!-- Coluna 2: Navegação -->
-      <div class="novo-footer-col-2">
-        <h4 style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; margin-bottom: 1.5rem;">Navegação</h4>
-        <a href="#history" class="novo-footer-link">Nossa História</a>
-        <a href="#categories" class="novo-footer-link">Categorias de Base</a>
-        <a href="#pilar-iniciacao" class="novo-footer-link">Projeto Social</a>
-        <a href="#apoie-modal" data-modal-open class="novo-footer-link">Como Apoiar</a>
-        <a href="#contact" class="novo-footer-link">Contato</a>
-      </div>
-
-      <!-- Coluna 3: Informações Legais -->
-      <div class="novo-footer-col-3">
-        <h4 style="font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; margin-bottom: 1.5rem;">Informações Legais</h4>
-        <a href="#" class="novo-footer-link">Política de Privacidade</a>
-        <a href="transparencia.html" class="novo-footer-link">Transparência</a>
-        <a href="#" class="novo-footer-link">Estatuto Social</a>
-      </div>
-    </div>
-
-    <!-- BLOCO 2: Apoio e Patrocinadores -->
-    <div class="novo-footer-bottom">
-      
-      <!-- Seção de Apoio (3 imagens) -->
-      <div class="novo-footer-apoio">
-        <h4 class="novo-footer-title">Apoio:</h4>
-        <div class="novo-footer-img-group">
-          <!-- Apoio 1 -->
-          <img src="img/adfmi-footer.png" alt="Apoio ADFMI" class="img-apoio" />
-          <!-- Apoio 2 -->
-          <img src="img.png" alt="" class="img-apoio" />
-          <!-- Apoio 3 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-apoio " />
-        </div>
-      </div>
-
-      <!-- Seção de Patrocinadores (6 imagens) -->
-      <div class="novo-footer-patroc">
-        <h4 class="novo-footer-title">Patrocinadores:</h4>
-        <div class="novo-footer-img-group">
-          <!-- Patrocinador 1 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-patroc img-placeholder" />
-          <!-- Patrocinador 2 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
-          <!-- Patrocinador 3 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
-          <!-- Patrocinador 4 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="Patrocinador" class="img-patroc img-placeholder" />
-          <!-- Patrocinador 5 -->
-          <img src="img/SUA_IMAGEM_AQUI.png" alt="" class="img-patroc img-placeholder" />
-          
-        </div>
-      </div>
-
-    </div>
-
-    <!-- BLOCO 3: Copyright -->
-    <div class="novo-footer-copy">
-      <p>© 2026 Esporte Clube Itapetininga. Todos os direitos reservados.</p>
-      <p style="font-style: italic;">Orgulho da nossa cidade.</p>
-    </div>
-
-  </div>
-</footer>
-    <!-- WCAG fix: 2.1.1 -->
-    <div
-      class="accessibility-panel"
-      role="region"
-      aria-label="Ferramentas de acessibilidade"
-    >
-      <button
-        class="accessibility-trigger"
-        type="button"
-        aria-label="Abrir menu de acessibilidade"
-        aria-expanded="false"
-        aria-controls="accessibility-menu"
-      >
-        <span class="material-symbols-outlined" aria-hidden="true"
-          >accessibility_new</span
-        >
+    <!-- WIDGET DE ACESSIBILIDADE FLUTUANTE -->
+    <div class="accessibility-panel" role="region" aria-label="Ferramentas de acessibilidade">
+      <button class="accessibility-trigger" type="button" aria-label="Abrir menu de acessibilidade" aria-expanded="false" aria-controls="accessibility-menu">
+        <span class="material-symbols-outlined" aria-hidden="true">accessibility_new</span>
       </button>
       <div class="accessibility-content" id="accessibility-menu">
-        <!-- WCAG fix: 4.1.2 -->
-        <button
-          onclick="alternarCores()"
-          aria-pressed="false"
-          data-high-contrast-toggle
-        >
-          🎨 Alternar Cores
-        </button>
+        <button onclick="alternarCores()" aria-pressed="false" data-high-contrast-toggle>🎨 Alternar Cores</button>
         <button onclick="aumentarFonte()">🔍 A+</button>
         <button onclick="diminuirFonte()">🔎 A-</button>
         <button onclick="cursorGrande()">🖱️ Cursor Maior</button>
@@ -1220,35 +947,46 @@
         <button onclick="lerSelecao()">🔊 Ler Texto Selecionado</button>
       </div>
     </div>
+
+    <!-- SCRIPTS -->
     <script>
+      function toggleDropdown(menuId) {
+        const menu = document.getElementById(menuId);
+        if (!menu.classList.contains('ativo')) {
+          fecharTodosDropdowns();
+          menu.classList.add('ativo');
+        } else {
+          menu.classList.remove('ativo');
+        }
+      }
+
+      function fecharTodosDropdowns() {
+        const dropdowns = document.querySelectorAll('.menu-cascata');
+        dropdowns.forEach(drop => drop.classList.remove('ativo'));
+      }
+
+      document.addEventListener('click', function(event) {
+        const isClickInsideMenu = event.target.closest('.group');
+        if (!isClickInsideMenu) fecharTodosDropdowns();
+      });
+
       const mobileMenu = document.querySelector("[data-mobile-menu]");
-      const mobileMenuButton = document.querySelector(
-        "[data-mobile-menu-button]",
-      );
+      const mobileMenuButton = document.querySelector("[data-mobile-menu-button]");
       const mobileMenuIcon = document.querySelector("[data-mobile-menu-icon]");
-      const mobileMenuLinks = document.querySelectorAll(
-        "[data-mobile-menu-link]",
-      );
+      const mobileMenuLinks = document.querySelectorAll("[data-mobile-menu-link]");
       const topNavLinks = document.querySelectorAll("[data-nav-link]");
       const siteHeader = document.querySelector(".site-header");
       const contactForm = document.querySelector("#contact-form");
-      const contactFormMessage = document.querySelector(
-        "#contact-form-message",
-      );
 
-      // Definimos manualmente a ordem das seções na tela
       const sectionIds = ["hero", "history", "categories", "pilar-iniciacao", "pilar-rendimento", "contact"];
       const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
       function setActiveTopNavLink(sectionId) {
         topNavLinks.forEach((link) => {
           const href = link.getAttribute("href");
-          
-          // REGRA ESPECIAL: Se estiver na Pág 3 (Alto Rendimento), acende o menu 'Base'
           if (sectionId === "pilar-rendimento" && href === "#categories") {
             link.classList.add("is-active");
           } else {
-            // Comportamento normal para as outras seções
             link.classList.toggle("is-active", href === `#${sectionId}`);
           }
         });
@@ -1257,40 +995,21 @@
       function updateActiveTopNavLink() {
         let currentSection = sections[0];
         const headerOffset = siteHeader.offsetHeight + 16;
-
         sections.forEach((section) => {
           if (section.getBoundingClientRect().top <= headerOffset) {
             currentSection = section;
           }
         });
-
-        if (currentSection) {
-          setActiveTopNavLink(currentSection.id);
-        }
+        if (currentSection) setActiveTopNavLink(currentSection.id);
       }
 
       function updateHeaderOnScroll() {
         siteHeader.classList.toggle("header-scrolled", window.scrollY > 24);
       }
 
-      function resetLinkedSectionScroll(link) {
-        const href = link.getAttribute("href");
-
-        if (!href || !href.startsWith("#")) {
-          return;
-        }
-
-        const target = document.querySelector(href);
-
-        if (target && target.classList.contains("screen-section")) {
-          target.scrollTop = 0;
-        }
-      }
-
       function openMobileMenu() {
         mobileMenu.classList.add("is-open");
         mobileMenuButton.setAttribute("aria-expanded", "true");
-        mobileMenuButton.setAttribute("aria-label", "Fechar menu");
         mobileMenuIcon.textContent = "close";
         document.body.classList.add("mobile-menu-open");
       }
@@ -1298,7 +1017,6 @@
       function closeMobileMenu() {
         mobileMenu.classList.remove("is-open");
         mobileMenuButton.setAttribute("aria-expanded", "false");
-        mobileMenuButton.setAttribute("aria-label", "Abrir menu");
         mobileMenuIcon.textContent = "menu";
         document.body.classList.remove("mobile-menu-open");
       }
@@ -1315,30 +1033,12 @@
 
       mobileMenuLinks.forEach((link) => {
         link.addEventListener("click", () => {
-          resetLinkedSectionScroll(link);
           closeMobileMenu();
         });
-      });
-
-      topNavLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          resetLinkedSectionScroll(link);
-          setActiveTopNavLink(link.getAttribute("href").slice(1));
-        });
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          if (mobileMenu.classList.contains("is-open")) {
-            closeMobileMenu();
-          }
-        }
       });
 
       window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768) {
-          closeMobileMenu();
-        }
+        if (window.innerWidth >= 768) closeMobileMenu();
       });
 
       window.addEventListener("scroll", () => {
@@ -1346,120 +1046,48 @@
         updateHeaderOnScroll();
       });
 
-      updateActiveTopNavLink();
-      updateHeaderOnScroll();
-
-      
-
       document.addEventListener("DOMContentLoaded", () => {
-        const botaoAcessibilidade = document.querySelector(
-          ".accessibility-trigger",
-        );
-        const menuAcessibilidade = document.querySelector(
-          ".accessibility-panel",
-        );
-        const conteudoAcessibilidade = document.querySelector(
-          ".accessibility-content",
-        );
+        const botaoAcessibilidade = document.querySelector(".accessibility-trigger");
+        const menuAcessibilidade = document.querySelector(".accessibility-panel");
+        const conteudoAcessibilidade = document.querySelector(".accessibility-content");
 
-        if (
-          !botaoAcessibilidade ||
-          !menuAcessibilidade ||
-          !conteudoAcessibilidade
-        ) {
-          return;
+        if (botaoAcessibilidade && menuAcessibilidade && conteudoAcessibilidade) {
+          botaoAcessibilidade.addEventListener("click", (e) => {
+            e.stopPropagation();
+            conteudoAcessibilidade.classList.toggle("active");
+          });
+
+          document.addEventListener("click", () => {
+            conteudoAcessibilidade.classList.remove("active");
+          });
         }
-
-        function abrirMenuAcessibilidade() {
-          menuAcessibilidade.classList.add("active");
-          botaoAcessibilidade.setAttribute("aria-expanded", "true");
-
-          // WCAG fix: 2.1.1
-          const primeiroBotao = conteudoAcessibilidade.querySelector("button");
-          if (primeiroBotao) {
-            primeiroBotao.focus();
-          }
-        }
-
-        function fecharMenuAcessibilidade() {
-          menuAcessibilidade.classList.remove("active");
-          botaoAcessibilidade.setAttribute("aria-expanded", "false");
-
-          // WCAG fix: 2.1.1
-          botaoAcessibilidade.focus();
-        }
-
-        botaoAcessibilidade.addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (menuAcessibilidade.classList.contains("active")) {
-            fecharMenuAcessibilidade();
-          } else {
-            abrirMenuAcessibilidade();
-          }
-        });
-
-        menuAcessibilidade.addEventListener("click", (e) => {
-          e.stopPropagation();
-        });
-
-        document.addEventListener("click", () => {
-          if (menuAcessibilidade.classList.contains("active")) {
-            fecharMenuAcessibilidade();
-          }
-        });
-
-        document.addEventListener("keydown", (e) => {
-          if (
-            e.key === "Escape" &&
-            menuAcessibilidade.classList.contains("active")
-          ) {
-            fecharMenuAcessibilidade();
-          }
-        });
       });
 
       function alternarCores() {
         document.body.classList.toggle("ativo");
-
-        // WCAG fix: 4.1.2
-        const botoesAltoContraste = document.querySelectorAll(
-          "[data-high-contrast-toggle]",
-        );
-        botoesAltoContraste.forEach((button) => {
-          button.setAttribute(
-            "aria-pressed",
-            document.body.classList.contains("ativo"),
-          );
-        });
       }
 
       let tamanhoFonte = 100;
-      const tamanhoFonteMinimo = 70;
-      const tamanhoFonteMaximo = 150;
-
       function aplicarTamanhoFonte() {
         document.documentElement.style.fontSize = tamanhoFonte + "%";
       }
-
       function aumentarFonte() {
-        if (tamanhoFonte < tamanhoFonteMaximo) {
+        if (tamanhoFonte < 150) {
           tamanhoFonte += 10;
           aplicarTamanhoFonte();
         }
       }
-
       function diminuirFonte() {
-        if (tamanhoFonte > tamanhoFonteMinimo) {
+        if (tamanhoFonte > 70) {
           tamanhoFonte -= 10;
           aplicarTamanhoFonte();
         }
       }
-
       function cursorGrande() {
         document.body.classList.toggle("cursor-grande");
       }
 
-      // Modal: Apoie o Clube
+      // MODAL APOIE
       const apoieModal = document.querySelector("[data-modal]");
       const modalOpenBtns = document.querySelectorAll("[data-modal-open]");
       const modalCloseBtns = document.querySelectorAll("[data-modal-close]");
@@ -1480,30 +1108,23 @@
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           openModal();
-        }),
+        })
       );
 
       modalCloseBtns.forEach((btn) =>
-        btn.addEventListener("click", closeModal),
+        btn.addEventListener("click", closeModal)
       );
 
-      apoieModal.addEventListener("click", (e) => {
-        if (e.target === apoieModal) closeModal();
-      });
+      if (apoieModal) {
+        apoieModal.addEventListener("click", (e) => {
+          if (e.target === apoieModal) closeModal();
+        });
+      }
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && apoieModal.classList.contains("is-open"))
-          closeModal();
-      });
-      // --- INÍCIO DO NOVO CÓDIGO DO FORMULÁRIO ---
-      // --- INÍCIO DO NOVO CÓDIGO DO FORMULÁRIO ---
-      const submitBtn = contactForm.querySelector("button[type='submit']");
-
+      // FORMULÁRIO DE CONTATO (FormSubmit AJAX)
       if (contactForm) {
         contactForm.addEventListener("submit", (event) => {
-          event.preventDefault(); // Impede de abrir a página branca do FormSubmit
-
-          // Verifica se a div da mensagem existe, se não, cria uma na hora
+          event.preventDefault(); 
           let msgBox = document.querySelector("#contact-form-message");
           if (!msgBox) {
             msgBox = document.createElement("div");
@@ -1512,69 +1133,46 @@
             contactForm.appendChild(msgBox);
           }
 
-          // Muda o texto do botão enquanto está enviando
+          const submitBtn = contactForm.querySelector("button[type='submit']");
           const originalBtnText = submitBtn.innerText;
           submitBtn.innerText = "ENVIANDO...";
-          submitBtn.disabled = true; // Evita cliques duplos
+          submitBtn.disabled = true;
 
           const formData = new FormData(contactForm);
 
-          // Faz o envio "por trás dos panos"
           fetch(contactForm.action, {
             method: "POST",
             body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
+            headers: { 'Accept': 'application/json' }
           })
           .then(response => {
             if (!response.ok) throw new Error("Erro na rede");
             return response.json();
           })
           .then(data => {
-            // Mostra a mensagem de sucesso
             msgBox.innerText = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
-            msgBox.style.color = "#10b981"; // Cor verde
+            msgBox.style.color = "#10b981";
             msgBox.style.display = "block"; 
-            
-            contactForm.reset(); // Limpa os campos preenchidos
-            submitBtn.innerText = originalBtnText; // Volta o texto do botão
+            contactForm.reset(); 
+            submitBtn.innerText = originalBtnText; 
             submitBtn.disabled = false;
-            
-            // Esconde a mensagem de sucesso depois de 5 segundos
-            setTimeout(() => {
-              msgBox.style.display = "none";
-            }, 5000);
+            setTimeout(() => { msgBox.style.display = "none"; }, 5000);
           })
           .catch(error => {
-            // Se der erro
             msgBox.innerText = "Erro ao enviar. Verifique sua conexão e tente novamente.";
-            msgBox.style.color = "#ef4444"; // Cor vermelha
+            msgBox.style.color = "#ef4444"; 
             msgBox.style.display = "block";
             submitBtn.innerText = originalBtnText;
             submitBtn.disabled = false;
           });
         });
       }
-      // --- FIM DO NOVO CÓDIGO DO FORMULÁRIO ---
-      // --- FIM DO NOVO CÓDIGO DO FORMULÁRIO ---
-    </script>
-    <div vw class="enabled">
-      <div vw-access-button class="active"></div>
-      <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-      </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-      new window.VLibras.Widget("https://vlibras.gov.br/app");
 
+      // FUNÇÕES DE ÁUDIO
       function lerPagina() {
         const texto = document.body.innerText;
-
         const fala = new SpeechSynthesisUtterance(texto);
         fala.lang = "pt-BR";
-
         speechSynthesis.cancel();
         speechSynthesis.speak(fala);
       }
@@ -1585,18 +1183,27 @@
 
       function lerSelecao() {
         const texto = window.getSelection().toString();
-
         if (!texto) {
           alert("Selecione um texto primeiro.");
           return;
         }
-
         const fala = new SpeechSynthesisUtterance(texto);
         fala.lang = "pt-BR";
-
         speechSynthesis.cancel();
         speechSynthesis.speak(fala);
       }
+    </script>
+
+    <!-- WIDGET DE LIBRAS -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
   </body>
 </html>
