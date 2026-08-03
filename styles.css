@@ -3362,3 +3362,9 @@ body.modal-open {
 .support-modal.is-open > .support-modal-panel {
   transform: scale(1);
 }
+/* Remove a lingueta de introdução do VLibras em celulares e telas pequenas */
+@media (max-width: 768px) {
+  [vw] [vw-access-button] {
+    animation: none !important;
+  }
+}
