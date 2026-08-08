@@ -3412,3 +3412,23 @@ body.modal-open {
     transform: scale(1.2) !important;
   }
 }
+/* =========================================================
+   AJUSTE DE ESPAÇAMENTO NAS PÁGINAS INTERNAS (DIRETORIA, ETC)
+   ========================================================= */
+
+/* 1. No PC: Dá uma leve encolhida no espaço superior (de 6rem para 4rem) */
+@media (min-width: 900px) {
+  .py-24 {
+    padding-top: 4rem !important; 
+  }
+}
+
+/* 2. No Celular: Reduz drasticamente o buraco para o texto subir */
+@media (max-width: 899px) {
+  .py-24 {
+    padding-top: 2rem !important; /* Corta o espaço gigante para um terço do tamanho */
+  }
+  .py-16 {
+    padding-top: 1.5rem !important; /* Puxa textos menores mais para cima também */
+  }
+}
