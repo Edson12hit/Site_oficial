@@ -1098,7 +1098,7 @@ button:focus-visible {
 .mobile-menu {
   display: grid;
   grid-template-rows: 0fr;
-  border-top: 1px solid rgba(252, 204, 0, 0.25);
+  border-top: 0px solid transparent; /* Esconde a borda quando fechado */
   background:
     radial-gradient(
       circle at 12% 0%,
@@ -1106,40 +1106,38 @@ button:focus-visible {
       transparent 16rem
     ),
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
+  box-shadow: none; /* Esconde a sombra quando fechado */
   overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
   transition: all 260ms ease;
 }
 
 .mobile-menu.is-open {
   grid-template-rows: 1fr;
-  opacity: 1;
-  pointer-events: auto;
+  border-top: 1px solid rgba(252, 204, 0, 0.25); /* Devolve a borda ao abrir */
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24); /* Devolve a sombra ao abrir */
 }
 
-/* MANTÉM A IMAGEM NO LUGAR CERTO E O PC INTACTO */
-@media (max-width: 899px) {
+/* Garante que o menu não exista no PC */
+@media (min-width: 900px) {
   .mobile-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 999;
+    display: none !important;
   }
 }
 
-/* CÓDIGO ORIGINAL COM BARRA DE ROLAGEM FORÇADA */
 .mobile-menu-inner {
   display: grid;
   gap: 0.35rem;
   max-width: 80rem;
   margin: 0 auto;
   min-height: 0;
-  padding: 1.35rem 1rem 3rem; /* Espaço extra no final para não colar no fundo */
-  max-height: 75vh; /* Garante que o menu caiba na tela e ative a rolagem */
-  overflow-y: auto; /* Permite rolar para ver os links escondidos */
+  padding: 0 1rem; /* Zera o espaçamento quando fechado (Tira o buraco) */
+  max-height: 90vh;
+  overflow-y: auto;
+  transition: padding 260ms ease;
+}
+
+.mobile-menu.is-open .mobile-menu-inner {
+  padding: 1.35rem 1rem 1.5rem; /* Devolve o espaçamento quando o menu é aberto */
 }
 
 .mobile-menu-brand {
