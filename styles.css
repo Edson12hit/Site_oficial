@@ -1098,7 +1098,7 @@ button:focus-visible {
 .mobile-menu {
   display: grid;
   grid-template-rows: 0fr;
-  border-top: 1px solid rgba(252, 204, 0, 0.25);
+  border-top: 0 solid rgba(252, 204, 0, 0);
   background:
     radial-gradient(
       circle at 12% 0%,
@@ -1106,13 +1106,15 @@ button:focus-visible {
       transparent 16rem
     ),
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0);
   overflow: hidden;
-  transition: grid-template-rows 260ms ease;
+  transition: grid-template-rows 260ms ease, border-top 260ms ease, box-shadow 260ms ease;
 }
 
 .mobile-menu.is-open {
   grid-template-rows: 1fr;
+  border-top: 1px solid rgba(252, 204, 0, 0.25);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
 }
 
 .mobile-menu-inner {
@@ -1122,7 +1124,6 @@ button:focus-visible {
   margin: 0 auto;
   min-height: 0;
   padding: 1.35rem 1rem 1.5rem;
-
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -1160,7 +1161,7 @@ button:focus-visible {
   min-height: 3rem;
   padding: 0.9rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: transparent; /* WCAG fix: 4.1.2 */
+  background: transparent;
   color: #ffffff;
   cursor: pointer;
   font-family: "Barlow Condensed", Inter, sans-serif;
@@ -1204,7 +1205,6 @@ button:focus-visible {
   background: #ffe085;
   padding-left: 0;
 }
-
 @media (min-width: 640px) {
   .sm\:flex-row {
     flex-direction: row;
