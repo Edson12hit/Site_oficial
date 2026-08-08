@@ -1098,7 +1098,7 @@ button:focus-visible {
 .mobile-menu {
   display: grid;
   grid-template-rows: 0fr;
-  border-top: 0 solid rgba(252, 204, 0, 0);
+  border-top: 1px solid rgba(252, 204, 0, 0.25);
   background:
     radial-gradient(
       circle at 12% 0%,
@@ -1106,15 +1106,33 @@ button:focus-visible {
       transparent 16rem
     ),
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
   overflow: hidden;
-  transition: grid-template-rows 260ms ease, border-top 260ms ease, box-shadow 260ms ease;
+  transition: all 260ms ease;
 }
 
 .mobile-menu.is-open {
   grid-template-rows: 1fr;
-  border-top: 1px solid rgba(252, 204, 0, 0.25);
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
+}
+
+/* ==========================================
+   CORREÇÃO EXCLUSIVA PARA CELULAR 
+   (O PC continua 100% intacto)
+   ========================================== */
+@media (max-width: 899px) {
+  .mobile-menu {
+    position: absolute;
+    top: 100%; /* Prende o menu embaixo do cabeçalho */
+    left: 0;
+    width: 100%;
+    border-top-color: transparent; /* Esconde a linha dourada quando fechado */
+    box-shadow: none; /* Esconde a sombra quando fechado */
+  }
+  
+  .mobile-menu.is-open {
+    border-top-color: rgba(252, 204, 0, 0.25);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
+  }
 }
 
 .mobile-menu-inner {
