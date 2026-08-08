@@ -1108,11 +1108,8 @@ button:focus-visible {
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
   overflow: hidden;
-  
-  /* O SEGREDO: Esconde a tarja sem quebrar a leitura dos links */
   opacity: 0;
   pointer-events: none;
-  
   transition: all 260ms ease;
 }
 
@@ -1129,19 +1126,20 @@ button:focus-visible {
     top: 100%;
     left: 0;
     width: 100%;
+    z-index: 999;
   }
 }
 
-/* CÓDIGO ORIGINAL RESTAURADO PARA OS LINKS VOLTAREM A FUNCIONAR */
+/* CÓDIGO ORIGINAL COM BARRA DE ROLAGEM FORÇADA */
 .mobile-menu-inner {
   display: grid;
   gap: 0.35rem;
   max-width: 80rem;
   margin: 0 auto;
   min-height: 0;
-  padding: 1.35rem 1rem 1.5rem;
-  max-height: 90vh;
-  overflow-y: auto;
+  padding: 1.35rem 1rem 3rem; /* Espaço extra no final para não colar no fundo */
+  max-height: 75vh; /* Garante que o menu caiba na tela e ative a rolagem */
+  overflow-y: auto; /* Permite rolar para ver os links escondidos */
 }
 
 .mobile-menu-brand {
