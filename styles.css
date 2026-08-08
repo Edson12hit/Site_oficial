@@ -3413,22 +3413,19 @@ body.modal-open {
   }
 }
 /* =========================================================
-   AJUSTE DE ESPAÇAMENTO NAS PÁGINAS INTERNAS (DIRETORIA, ETC)
+   AJUSTE DE ESPAÇAMENTO DO CABEÇALHO AZUL (TODAS AS PÁGINAS)
    ========================================================= */
 
-/* 1. No PC: Dá uma leve encolhida no espaço superior (de 6rem para 4rem) */
-@media (min-width: 900px) {
-  .py-24 {
-    padding-top: 4rem !important; 
-  }
+/* 1. Tamanho no PC: Diminui o espaço em cima e embaixo do título */
+.page-header {
+  padding-top: 3rem !important;    /* Espaço acima do título */
+  padding-bottom: 3rem !important; /* Espaço abaixo do título */
 }
 
-/* 2. No Celular: Reduz drasticamente o buraco para o texto subir */
+/* 2. Tamanho no Celular: Deixa bem mais curto para aproveitar a tela */
 @media (max-width: 899px) {
-  .py-24 {
-    padding-top: 2rem !important; /* Corta o espaço gigante para um terço do tamanho */
-  }
-  .py-16 {
-    padding-top: 1.5rem !important; /* Puxa textos menores mais para cima também */
+  .page-header {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
   }
 }
