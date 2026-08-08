@@ -1107,7 +1107,7 @@ button:focus-visible {
     ),
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
-  overflow: auto;
+  overflow: hidden;
   transition: grid-template-rows 260ms ease;
 }
 
