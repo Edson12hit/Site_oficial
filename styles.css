@@ -3397,3 +3397,18 @@ body.modal-open {
     animation: none !important;
   }
 }
+/* 1. No PC: Ajusta para mostrar o corpo inteiro dos atletas */
+@media (min-width: 900px) {
+  .hero-image {
+    object-position: 50% 20% !important; /* Diminuímos para 20% para a foto subir e mostrar os atletas */
+    transform: scale(1.0) !important;
+  }
+}
+
+/* 2. No Celular: Mantém o foco para cima para esconder os carros */
+@media (max-width: 899px) {
+  .hero-image {
+    object-position: 50% 25% !important; 
+    transform: scale(1.0) !important;
+  }
+}
