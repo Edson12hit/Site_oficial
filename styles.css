@@ -1108,15 +1108,17 @@ button:focus-visible {
     linear-gradient(180deg, rgba(8, 37, 103, 0.98), rgba(0, 18, 65, 0.99));
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
   overflow: hidden;
+  visibility: hidden; /* CORTA A TARJA FANTASMA */
   transition: all 260ms ease;
 }
 
 .mobile-menu.is-open {
   grid-template-rows: 1fr;
+  visibility: visible; /* MOSTRA O FUNDO AO ABRIR */
 }
 
 /* ==========================================
-   CORREÇÃO EXCLUSIVA PARA CELULAR 
+   CORREÇÃO EXCLUSIVA PARA CELULAR
    (O PC continua 100% intacto)
    ========================================== */
 @media (max-width: 899px) {
@@ -1128,7 +1130,7 @@ button:focus-visible {
     border-top-color: transparent; /* Esconde a linha dourada quando fechado */
     box-shadow: none; /* Esconde a sombra quando fechado */
   }
-  
+
   .mobile-menu.is-open {
     border-top-color: rgba(252, 204, 0, 0.25);
     box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.24);
@@ -1141,9 +1143,14 @@ button:focus-visible {
   max-width: 80rem;
   margin: 0 auto;
   min-height: 0;
-  padding: 1.35rem 1rem 1.5rem;
+  padding: 0 1rem; /* ZERA O ESPAÇAMENTO VERTICAL QUANDO FECHADO */
   max-height: 90vh;
   overflow-y: auto;
+  transition: padding 260ms ease;
+}
+
+.mobile-menu.is-open .mobile-menu-inner {
+  padding: 1.35rem 1rem 1.5rem; /* DEVOLVE O ESPAÇAMENTO QUANDO ABERTO */
 }
 
 .mobile-menu-brand {
