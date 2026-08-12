@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Peneiras e Avaliações - EC Itapetininga</title>
@@ -64,7 +65,7 @@
       }
       .page-header h1 {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: clamp(3rem, 6vw, 4.5rem);
+        font-size: clamp(2.5rem, 5vw, 4.0rem);
         color: #ffffff;
         letter-spacing: 0.05em;
         line-height: 1.1;
@@ -256,7 +257,7 @@
         
         <div class="relative z-10 px-4">
           <span class="text-secondary-container font-bold uppercase tracking-widest text-xs md:text-sm mb-2 block">Seja um Atleta</span>
-          <h1>Ingresso e Avaliações</h1>
+          <h1>Seletivas e Avaliações</h1>
           <p class="text-gray-200 text-base md:text-lg leading-relaxed mt-4">
             O Esporte Clube Itapetininga está sempre de portas abertas para os jovens da nossa cidade e região. Entenda como funciona a organização de vagas e avaliações em cada uma de nossas categorias.
           </p>
@@ -265,56 +266,77 @@
       </div>
 
       <!-- QUADROS DE AVISO E INFORMAÇÃO INSTITUCIONAL -->
-      <section class="bg-gray-100 py-10">
-        <div class="max-w-6xl mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section class="bg-gray-100 pt-6 pb-8">
+        <div class="max-w-6xl mx-auto px-4 lg:px-8">
           
-          <!-- Como Funciona o Ingresso -->
-          <div class="bg-white border-t-4 border-primary-container p-6 rounded-b-lg shadow-md flex flex-col gap-3">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="material-symbols-outlined text-primary-container text-3xl">info</span>
-              <h3 class="text-primary-container font-bold text-xl">Como funciona o ingresso?</h3>
-            </div>
-            <p class="text-gray-700 text-sm leading-relaxed">
-              <strong class="text-gray-900 block mb-1">PROJETO DE INICIAÇÃO e INCLUSÃO (10 a 15 anos):</strong> 
-              Não realizamos peneiras ou testes para esta faixa. O atendimento é feito por ordem de inscrição, com capacidade rigorosa de <strong>80 a 100 alunos</strong> para garantir a qualidade. Caso as vagas estejam preenchidas, o jovem entra em nossa fila de espera oficial.
-            </p>
-            <p class="text-gray-700 text-sm leading-relaxed mt-2 border-t border-gray-100 pt-3">
-              <strong class="text-gray-900 block mb-1">ALTO RENDIMENTO (Sub-15, Sub-17 e Sub-20):</strong> 
-              Ingresso exclusivo através de <strong>Avaliações e Seletivas (Peneiras)</strong> organizadas pela nossa comissão técnica.
-            </p>
+          <!-- 1. TÍTULO CENTRALIZADO -->
+          <div class="mb-10 flex items-center justify-center gap-3 md:gap-4">
+            <span class="material-symbols-outlined text-primary-container text-4xl md:text-5xl">info</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-container m-0">Como fazer parte?</h2>
           </div>
 
-          <!-- Transparência com o Botão de Inscrição -->
-          <div class="bg-yellow-50 border-t-4 border-secondary-container p-6 rounded-b-lg shadow-md flex flex-col justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-2 mb-2">
-                <span class="material-symbols-outlined text-yellow-600 text-3xl">warning</span>
-                <h3 class="text-yellow-800 font-bold text-xl">Transparência e Gratuidade</h3>
+         <!-- 2. GRID COM OS DOIS BOXES (INICIAÇÃO E ALTO RENDIMENTO) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <!-- Box 1: Iniciação -->
+            <div class="bg-white border-t-4 border-secondary-container rounded-lg shadow-md flex flex-col transition-transform hover:-translate-y-1 overflow-hidden">
+              <!-- Tarja Azul Claro -->
+              <div class="bg-blue-50 px-6 py-4 border-b border-blue-200">
+                <h3 class="text-primary-container font-bold text-lg m-0">PROJETO DE INICIAÇÃO E INCLUSÃO (10 a 15 anos)</h3>
               </div>
-              <p class="text-yellow-800 text-sm leading-relaxed">
-                O Esporte Clube Itapetininga <strong>NÃO COBRA NENHUMA TAXA</strong> para a realização de testes, peneiras, avaliações ou participação no projeto. 
-              </p>
-              <p class="text-yellow-800 text-sm leading-relaxed mt-1">
-                Também não possuímos intermediários ou empresários autorizados a agendar testes em nome do clube. Toda comunicação oficial é feita exclusivamente pelos nossos canais diretos.
-              </p>
+              <!-- Texto -->
+              <div class="p-6 h-full text-center">
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  Não realizamos peneiras ou testes para esta faixa etária. <BR>O atendimento é feito por ordem de inscrição, com capacidade rigorosa de <strong>80 a 100 alunos</strong> para garantir a qualidade. Caso as vagas estejam preenchidas, o aluno entra em nossa fila de espera oficial.
+                </p>
+              </div>
             </div>
 
-            <!-- BOTÃO PARA O FORMULÁRIO DO GOOGLE -->
-            <div class="mt-4 pt-4 border-t border-yellow-200 text-center">
-              <a href="https://forms.gle/Fd6GbHBNTJgFcCT47" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary-container text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-blue-900 transition-all text-sm uppercase tracking-wide w-full">
-                <span class="material-symbols-outlined">how_to_reg</span> Faça seu cadastro para avaliações
-              </a>
+            <!-- Box 2: Alto Rendimento -->
+            <div class="bg-white border-t-4 border-secondary-container rounded-lg shadow-md flex flex-col transition-transform hover:-translate-y-1 overflow-hidden">
+              <!-- Tarja Azul Claro -->
+              <div class="bg-blue-50 px-6 py-4 border-b border-blue-200">
+                <h3 class="text-primary-container font-bold text-lg m-0">ALTO RENDIMENTO (Sub-15, Sub-17 e Sub-20)</h3>
+              </div>
+              <!-- Texto e Botão -->
+              <div class="p-6 h-full flex flex-col justify-between gap-4">
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  Para participar das equipes de competição, o acesso é exclusivo através de <strong>Avaliações e Seletivas (Peneiras)</strong> organizadas pela nossa comissão técnica.
+                </p>
+                <!-- Botão alinhado à direita e no fundo -->
+                <div class="flex justify-end mt-2">
+                  <a href="https://forms.gle/Fd6GbHBNTJgFcCT47" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary-container text-white font-bold px-5 py-2.5 rounded-lg shadow-md hover:bg-blue-900 transition-all text-xs uppercase tracking-wide">
+                    <span class="material-symbols-outlined text-[18px]">how_to_reg</span> Faça seu cadastro
+                  </a>
+                </div>
+              </div>
             </div>
+
+          </div>
+
+          <!-- 3. BOX RETANGULAR MAIOR (TRANSPARÊNCIA) -->
+          <div class="max-w-3xl mx-auto bg-yellow-50 border-t-4 border-primary-container p-6 md:p-8 rounded-lg shadow-md mt-10 text-center">
+            <div class="flex items-center justify-center gap-2 mb-3">
+              <span class="material-symbols-outlined text-yellow-600 text-3xl">warning</span>
+              <h3 class="text-yellow-800 font-bold text-2xl">Transparência e Gratuidade</h3>
+            </div>
+            <p class="text-yellow-800 text-sm leading-relaxed mb-2">
+              O Esporte Clube Itapetininga <strong>NÃO COBRA NENHUMA TAXA</strong> para a realização de testes, peneiras, avaliações ou participação no projeto. 
+            </p>
+            <p class="text-yellow-800 text-sm leading-relaxed">
+              Também não possuímos intermediários ou empresários autorizados a agendar testes em nome do clube. Toda comunicação oficial é feita exclusivamente pelos nossos canais diretos.
+            </p>
+          </div>
           </div>
 
         </div>
       </section>
 
       <!-- SEÇÃO: COMO FUNCIONA AS AVALIAÇÕES DE RENDIMENTO -->
-      <section class="py-16 bg-white">
+      <section class="py-10 pb-8 bg-white">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
           
-          <div class="text-center mb-16">
+          <div class="text-center mb-10">
             <h2 class="text-3xl font-bold text-primary-container uppercase tracking-wider mb-2">Passo a Passo das Seletivas</h2>
             <p class="text-gray-600 text-sm">Exclusivo para as categorias Sub-15, Sub-17 e futuro Sub-20</p>
             <div class="w-16 h-1 bg-secondary-container mx-auto mt-4"></div>
@@ -364,14 +386,18 @@
       </section>
 
       <!-- SEÇÃO: CHECKLIST DE DOCUMENTOS E BOTÕES FINAIS -->
-      <section class="py-16 bg-gray-50 border-t border-gray-200">
+      <section class="pt-8 pb-8 bg-gray-50 border-t border-gray-200">
         <div class="max-w-4xl mx-auto px-4 lg:px-8">
           
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            <div class="bg-primary-container p-6 md:p-8 text-center">
-              <span class="material-symbols-outlined text-secondary-container text-4xl mb-2">checklist</span>
-              <h2 class="text-2xl font-bold text-white uppercase tracking-wider">O que levar no dia?</h2>
-              <p class="text-gray-300 text-sm mt-2">A falta de qualquer item abaixo impossibilita a participação por questões legais e de segurança.</p>
+            <div class="bg-primary-container p-6 md:p-8 text-center flex flex-col items-center">
+              <!-- Ícone e Título lado a lado -->
+              <div class="flex items-center justify-center gap-3 mb-2">
+                <span class="material-symbols-outlined text-secondary-container text-4xl">checklist</span>
+                <h2 class="text-2xl font-bold text-white uppercase tracking-wider m-0">O que levar no dia?</h2>
+              </div>
+              <!-- Subtítulo -->
+              <p class="text-gray-300 text-sm">A falta de qualquer item abaixo impossibilita a participação por questões legais e de segurança.</p>
             </div>
             
             <div class="p-8">

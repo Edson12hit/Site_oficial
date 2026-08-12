@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elenco - Esporte Clube Itapetininga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    /* ESTILOS BÁSICOS */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: #334155;
+    }
+
+    /* CABEÇALHO DA PÁGINA (HERO) INCREMENTADO */
+    .elenco-hero {
+      background: linear-gradient(135deg, #0b1c3f 0%, #172a5a 100%);
+      color: white;
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 1.5px solid #ffcc00;
+      position: relative;
+    }
+    /* A NOVA LINHA AMARELA FLUTUANTE (Abaixo do texto) */
+    .linha-amarela-topo {
+      background-color: #ffcc00; 
+      height: 4px;           /* GROSSURA: mude para 2px se quiser mais fina */
+      width: 150px;          /* LARGURA: mude para 100px ou 200px para ajustar */
+      margin-top: 2.5rem;    /* DISTÂNCIA DO TEXTO acima dela */
+      margin-bottom: 0;      /* DISTÂNCIA DO FINAL AZUL (se quiser afastar mais do fim, aumente aqui) */
+      margin-left: auto;     /* Centraliza automaticamente */
+      margin-right: auto;    /* Centraliza automaticamente */
+      border-radius: 4px; 
+    }
+    .hero-logo {
+      width: 90px;
+      height: auto;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    .elenco-hero h1 {
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .elenco-hero p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem;
+    }
+
+    /* ======================================================= */
+    /* NOVO: ESTILO DO BOTÃO VOLTAR DO TOPO (Pequeno e à esquerda) */
+    /* ======================================================= */
+    .voltar-topo-container {
+      display: flex;
+      justify-content: flex-start; /* Alinha totalmente à esquerda */
+      margin-bottom: 1rem;
+    }
+    .btn-acao-pequeno {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #64748b; /* Cinza discreto */
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem; /* Letra menor */
+      background-color: white;
+      padding: 0.4rem 0.8rem; /* Botão menorzinho */
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .btn-acao-pequeno:hover {
+      border-color: #0b1c3f;
+      background-color: #0b1c3f;
+      color: white;
+    }
+
+    /* ESTILO DOS BOTÕES DE AÇÃO DO FINAL (Grandes e centralizados) */
+    .acoes-botoes {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .btn-acao {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #0b1c3f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      background-color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .btn-acao:hover {
+      border-color: #0b1c3f;
+      background-color: #0b1c3f;
+      color: white;
+    }
+
+    /* BOTÕES DE FILTRO (Sub-15, Sub-17) */
+    .filtros {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-filtro {
+      background-color: white;
+      border: 2px solid #e2e8f0;
+      color: #0b1c3f;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .btn-filtro:hover {
+      border-color: #0b1c3f;
+    }
+    .btn-filtro.ativo {
+      background-color: #0b1c3f;
+      color: white;
+      border-color: #0b1c3f;
+    }
+
+    /* GRID DE ATLETAS (Organizado por linhas) */
+    .grid-elenco {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+    .linha-elenco {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 2rem; /* Mantém a distância nas laterais dos cards */
+      row-gap: 0.5rem;  /* Gruda o título nos cards do próprio bloco */
+      margin-bottom: 2rem; /* O SEGREDO ESTÁ AQUI: Afasta este bloco inteiro do próximo título! */
+    }
+
+    /* DESTAQUE DOS TÍTULOS DE POSIÇÃO */
+    .titulo-posicao {
+      text-align: center;
+      width: 100%;
+      font-size: 1.4rem;
+      color: #0b1c3f;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .titulo-posicao::before,
+    .titulo-posicao::after {
+      content: "";
+      height: 4px;
+      width: 40px;
+      background-color: #ffcc00;
+      border-radius: 2px;
+    }
+
+    /* CARD DO ATLETA */
+    .card-atleta {
+      width: 240px;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .card-atleta:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .card-foto-container {
+      width: 100%;
+      height: 300px;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .card-foto-real {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-logo-padrao {
+      width: 120px;
+      height: auto;
+      opacity: 0.3;
+      filter: grayscale(100%);
+    }
+    .card-info {
+      padding: 1.5rem;
+      text-align: center;
+      border-top: 3px solid #ffcc00;
+    }
+    .atleta-nome {
+      font-size: 1.25rem;
+      color: #0b1c3f;
+      margin: 0 0 0.5rem 0;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .atleta-posicao {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    
+    /* TAG DA CATEGORIA (Badge flutuante) */
+    .tag-categoria {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #ffcc00;
+      color: #0b1c3f;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* ========================================= */
+    /* RESPONSIVIDADE (CELULARES E TABLETS)      */
+    /* ========================================= */
+    @media (max-width: 768px) {
+      .elenco-hero {
+        padding: 3rem 1rem 2rem; 
+      }
+      .hero-logo {
+        width: 75px; 
+      }
+      .elenco-hero h1 {
+        font-size: 1.8rem; 
+      }
+      .elenco-hero p {
+        font-size: 0.95rem;
+      }
+      .filtros {
+        gap: 0.5rem;
+      }
+      .btn-filtro {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem; 
+      }
+      .card-atleta {
+        width: 100%; 
+        max-width: 280px; 
+      }
+      .linha-elenco {
+        gap: 1.5rem; 
+      }
+      .grid-elenco {
+        gap: 2.5rem;
+      }
+      .titulo-posicao {
+        font-size: 1.2rem;
+      }
+      .titulo-posicao::before,
+      .titulo-posicao::after {
+        width: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO COM O ESCUDO (id="topo" para o link do final funcionar) -->
+  <section class="elenco-hero" id="topo">
+    <img src="img/elenco/eci.png" alt="Escudo ECI" class="hero-logo">
+    <h1>Elenco Oficial</h1>
+    <p>Conheça os jovens talentos que representam o <strong>Esporte Clube Itapetininga</strong> no Campeonato Paulista e Paulista CUP.</p>
+    <div class="linha-amarela-topo"></div><BR>
+     <p>EM CONSTRUÇÃO</p>
+  </section>
+
+  <div class="container">
+    
+    <!-- BOTÃO VOLTAR DO TOPO (Pequeno e alinhado à esquerda!) -->
+    <div class="voltar-topo-container">
+      <a href="index.html" class="btn-acao-pequeno">
+        <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back</span>
+        Voltar ao Site
+      </a>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+      <button class="btn-filtro ativo" onclick="filtrarCategoria('sub15', this)">Sub-15</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('sub17', this)">Sub-17</button>
+      <button class="btn-filtro" onclick="filtrarCategoria('sub20', this)">Sub-20</button>
+    </div>
+
+    <!-- GALERIA DE ATLETAS -->
+    <div class="grid-elenco">
+
+      <!-- ============================ -->
+      <!-- BLOCO INTEIRO DO SUB-15      -->
+      <!-- ============================ -->
+      <div id="sub15" class="elenco-categoria">
+        
+        <!-- 1ª LINHA: GOLEIROS (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Goleiros</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 1</h3><p class="atleta-posicao">Goleiro</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 2</h3><p class="atleta-posicao">Goleiro</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 3</h3><p class="atleta-posicao">Goleiro</p></div></div>
+        </div>
+
+        <!-- 2ª LINHA: LATERAIS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Laterais</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 4</h3><p class="atleta-posicao">Lateral Direito</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 5</h3><p class="atleta-posicao">Lateral Direito</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 6</h3><p class="atleta-posicao">Lateral Esquerdo</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 7</h3><p class="atleta-posicao">Lateral Esquerdo</p></div></div>
+        </div>
+
+        <!-- 3ª LINHA: ZAGUEIROS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Zagueiros</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 8</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 9</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 10</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 11</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+        </div>
+
+        <!-- 4ª LINHA: VOLANTES (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Volantes</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 12</h3><p class="atleta-posicao">Volante</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 13</h3><p class="atleta-posicao">Volante</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 14</h3><p class="atleta-posicao">Volante</p></div></div>
+        </div>
+
+        <!-- 5ª LINHA: MEIAS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Meio-Campistas</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 15</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 16</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 17</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 18</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+        </div>
+
+        <!-- 6ª LINHA: PONTAS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Pontas</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 19</h3><p class="atleta-posicao">Ponta Direita</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 20</h3><p class="atleta-posicao">Ponta Direita</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 21</h3><p class="atleta-posicao">Ponta Esquerda</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 22</h3><p class="atleta-posicao">Ponta Esquerda</p></div></div>
+        </div>
+
+        <!-- 7ª LINHA: ATACANTES (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Atacantes</h4>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 23</h3><p class="atleta-posicao">Centroavante</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 24</h3><p class="atleta-posicao">Centroavante</p></div></div>
+          <div class="card-atleta sub15"><div class="tag-categoria">Sub-15</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 25</h3><p class="atleta-posicao">Centroavante</p></div></div>
+        </div>
+
+      </div>
+
+      <!-- ============================ -->
+      <!-- BLOCO INTEIRO DO SUB-17      -->
+      <!-- ============================ -->
+      <div id="sub17" class="elenco-categoria" style="display: none;">
+        
+        <!-- 1ª LINHA: GOLEIROS (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Goleiros</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 1</h3><p class="atleta-posicao">Goleiro</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 2</h3><p class="atleta-posicao">Goleiro</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 3</h3><p class="atleta-posicao">Goleiro</p></div></div>
+        </div>
+
+        <!-- 2ª LINHA: LATERAIS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Laterais</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 4</h3><p class="atleta-posicao">Lateral Direito</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 5</h3><p class="atleta-posicao">Lateral Direito</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 6</h3><p class="atleta-posicao">Lateral Esquerdo</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 7</h3><p class="atleta-posicao">Lateral Esquerdo</p></div></div>
+        </div>
+
+        <!-- 3ª LINHA: ZAGUEIROS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Zagueiros</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 8</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 9</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 10</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 11</h3><p class="atleta-posicao">Zagueiro</p></div></div>
+        </div>
+
+        <!-- 4ª LINHA: VOLANTES (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Volantes</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 12</h3><p class="atleta-posicao">Volante</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 13</h3><p class="atleta-posicao">Volante</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 14</h3><p class="atleta-posicao">Volante</p></div></div>
+        </div>
+
+        <!-- 5ª LINHA: MEIAS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Meio-Campistas</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 15</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 16</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 17</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 18</h3><p class="atleta-posicao">Meio-Campo</p></div></div>
+        </div>
+
+        <!-- 6ª LINHA: PONTAS (4) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Pontas</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 19</h3><p class="atleta-posicao">Ponta Direita</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 20</h3><p class="atleta-posicao">Ponta Direita</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 21</h3><p class="atleta-posicao">Ponta Esquerda</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 22</h3><p class="atleta-posicao">Ponta Esquerda</p></div></div>
+        </div>
+
+        <!-- 7ª LINHA: ATACANTES (3) -->
+        <div class="linha-elenco">
+          <h4 class="titulo-posicao">Atacantes</h4>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 23</h3><p class="atleta-posicao">Centroavante</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 24</h3><p class="atleta-posicao">Centroavante</p></div></div>
+          <div class="card-atleta sub17"><div class="tag-categoria">Sub-17</div><div class="card-foto-container"><img src="img/elenco/eci.png" alt="Sem Foto" class="card-logo-padrao"></div><div class="card-info"><h3 class="atleta-nome">Atleta 25</h3><p class="atleta-posicao">Centroavante</p></div></div>
+        </div>
+
+      </div>
+
+      <!-- ============================ -->
+      <!-- BLOCO INTEIRO DO SUB-20      -->
+      <!-- ============================ -->
+      <div id="sub20" class="elenco-categoria" style="display: none;">
+         <div class="linha-elenco">
+          <h4 class="titulo-posicao" style="margin-top: 2rem;">Elenco em Formação</h4>
+        </div>
+      </div>
+
+    </div> <!-- FIM DA GRID-ELENCO -->
+
+    <!-- ============================================== -->
+    <!-- BOTÕES DE FIM DE PÁGINA (Mantidos iguais!)     -->
+    <!-- ============================================== -->
+    <div class="acoes-botoes" style="margin-top: 2rem;">
+      <a href="#topo" class="btn-acao">
+        <span class="material-symbols-outlined" style="font-size: 20px;">arrow_upward</span>
+        Voltar ao Topo
+      </a>
+      <a href="index.html" class="btn-acao" style="background-color: #0b1c3f; color: white; border-color: #0b1c3f;">
+        <span class="material-symbols-outlined" style="font-size: 20px;">home</span>
+        Página Inicial
+      </a>
+    </div>
+
+  </div> <!-- FIM DO CONTAINER PRINCIPAL -->
+
+  <script>
+    function filtrarCategoria(idCategoria, botaoClicado) {
+      // 1. Tira a marcação de 'ativo' de todos os botões
+      const botoes = document.querySelectorAll('.btn-filtro');
+      botoes.forEach(botao => botao.classList.remove('ativo'));
+      
+      // 2. Coloca a marcação de 'ativo' no botão que foi clicado
+      botaoClicado.classList.add('ativo');
+
+      // 3. Esconde todas as categorias de times
+      const todasCategorias = document.querySelectorAll('.elenco-categoria');
+      todasCategorias.forEach(categoria => {
+        categoria.style.display = 'none';
+      });
+
+      // 4. Mostra apenas a categoria escolhida
+      const categoriaEscolhida = document.getElementById(idCategoria);
+      if (categoriaEscolhida) {
+        categoriaEscolhida.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
